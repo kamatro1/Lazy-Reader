@@ -1,0 +1,21 @@
+{
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "name": "React Chrome Extension",
+    "description": "This is a Chrome extension built with React and TypeScript",
+    "action": {
+        "default_popup": "js/popup.html",
+        "default_title": "React Chrome Extension",
+        "default_sidebar": {
+            "default_panel": "js/sidebar.html",
+            "open_at_install": true,
+            "open_at_update": true
+        }
+    },
+    "permissions": [
+        "sidePanel"
+    ],
+    "side_panel": {
+        "default_path": "js/sidebar.html"
+      }
+}
