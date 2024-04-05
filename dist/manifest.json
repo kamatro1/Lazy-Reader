@@ -1,13 +1,13 @@
 {
     "version": "1.0.0",
     "manifest_version": 3,
-    "name": "React Chrome Extension",
-    "description": "This is a Chrome extension built with React and TypeScript",
+    "name": "Lazy Reader",
+    "description": "This is a Chrome extension built with React and TypeScript. Some random description here",
     "action": {
         "default_popup": "js/popup.html",
-        "default_title": "React Chrome Extension",
+        "default_title": "Lazy Reader",
         "default_sidebar": {
-            "default_panel": "js/sidebar.html",
+            "default_panel": "js/sidepanel.html",
             "open_at_install": true,
             "open_at_update": true
         }
@@ -16,6 +16,6 @@
         "sidePanel"
     ],
     "side_panel": {
-        "default_path": "js/sidebar.html"
+        "default_path": "js/sidepanel.html"
       }
 }

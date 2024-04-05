@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin")
 module.exports = {
     entry: {
         popup: "./src/popup/index.tsx",
-        sidebar: "./src/sidebar/index.tsx"
+        sidepanel: "./src/sidepanel/index.tsx"
     },
     mode: "production",
     module: {
@@ -38,7 +38,7 @@ module.exports = {
             ],
         }),
         ...getHtmlPlugins(["popup"]),
-        ...getHtmlPlugins(["sidebar"]),
+        ...getHtmlPlugins(["sidepanel"]),
     ],
     resolve: {
         extensions: [".tsx", ".ts", ".js"],

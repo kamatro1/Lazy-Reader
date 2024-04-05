@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
+import './Popup.css';
 
-function App() {
+function Popup() {
   return (
     <div className="App">
       <header>Lazy Reader</header>
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export default Popup;

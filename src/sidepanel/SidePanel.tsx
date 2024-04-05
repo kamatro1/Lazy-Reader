@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './SidePanel.css';
 
-function App() {
+function SidePanel() {
     useEffect(() => {
         console.log("SIDE BAR OPENED")
     }, [])
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App;
+export default SidePanel;
