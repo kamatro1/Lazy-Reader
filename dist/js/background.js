@@ -1,0 +1,1 @@
+(()=>{"use strict";chrome.sidePanel.setPanelBehavior({openPanelOnActionClick:!0}).catch((function(e){return console.error(e)})),chrome.runtime.onInstalled.addListener((function(){console.log("I just installed my chrome extension")}))})();
