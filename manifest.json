@@ -25,6 +25,7 @@
     "side_panel": {
         "default_path": "js/sidepanel.html"
     },
+    "options_page" : "js/options.html",
     "background": {
         "service_worker": "js/background.js"
     }
