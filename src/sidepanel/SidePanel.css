@@ -1,5 +1,5 @@
 .App {
-    color: white;
+    color: purple;
     text-align: center;
   }
   
@@ -9,3 +9,26 @@
     background-color: pink;
   
   }
+
+  :root {
+    background-color: orange;
+    overflow-y: hidden;
+  }
+
+  .header {
+    background-color: #abcdef;
+    height: 120px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    max-width: 100%;
+  }
+
+  .content {
+    background-color: #123451;
+    height: 695px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 100%;
+  }
+ 
