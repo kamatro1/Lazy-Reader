@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
 .App {
     color: purple;
     text-align: center;
@@ -11,23 +13,78 @@
   }
 
   :root {
-    background-color: orange;
+    background-color: #ffffff;
     overflow-y: hidden;
   }
 
+  body {
+    font-family: 'Gamja Flower', sans-serif;
+  }
+
   .header {
-    background-color: #abcdef;
+    background-color: #ffffff;
     height: 120px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    border: 2px solid #000000;
+    margin-bottom: 8px;
+    position: relative;
+    max-width: 100%;
+  }
+
+  .header-top {
+    height: 60px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 2px solid #c1c1c1;
+    position: relative;
+    max-width: 100%;
+    display: flex;
+  }
+
+  .header-top-logo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 50%;
+  }
+
+  .logo {
+    height: 60px;
+    width: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .logo-title {
+    font-size: 31px;
+  }
+
+  .header-top-buttons {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 50%;
+  }
+
+  .button {
+    height: 32px;
+    width: 32px;
+    margin-right: 10px;
+  }
+
+  .header-bottom {
+    height: 60px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     position: relative;
     max-width: 100%;
   }
 
   .content {
-    background-color: #123451;
-    height: 695px;
+    background-color: #ffffff;
+    height: 690px;
     border-radius: 10px;
+    border: 2px solid #000000;
     position: relative;
     max-width: 100%;
   }
