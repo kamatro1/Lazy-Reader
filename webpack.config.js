@@ -5,7 +5,8 @@ const CopyPlugin = require("copy-webpack-plugin")
 module.exports = {
     entry: {
         popup: "./src/popup/index.tsx",
-        sidepanel: "./src/sidepanel/index.tsx"
+        sidepanel: "./src/sidepanel/index.tsx",
+        background: "./src/background/background.ts"
     },
     mode: "production",
     module: {
@@ -35,6 +36,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "manifest.json", to: "../manifest.json" },
+                { from: "src/icons", to: "../icons" }, 
             ],
         }),
         ...getHtmlPlugins([
