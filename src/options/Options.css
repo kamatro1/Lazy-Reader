@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
+.options {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    font-family: 'Gamja Flower', sans-serif;
+}

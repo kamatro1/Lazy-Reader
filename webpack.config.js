@@ -6,6 +6,7 @@ module.exports = {
     entry: {
         popup: "./src/popup/index.tsx",
         sidepanel: "./src/sidepanel/index.tsx",
+        options: "./src/options/index.tsx",
         background: "./src/background/background.ts"
     },
     mode: "production",
@@ -41,7 +42,8 @@ module.exports = {
         }),
         ...getHtmlPlugins([
             "popup",
-            "sidepanel"
+            "sidepanel",
+            "options"
         ]),
     ],
     resolve: {
