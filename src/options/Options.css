@@ -1,12 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
 
 .container {
-    width: 100%;
     height: 100%;
     font-family: 'Gamja Flower', sans-serif;
+    padding: 25px 50px;
 }
 
 .header {
     height: 20%;
     border-bottom: 4px solid #C1C1C1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#close32, #checkbox32, #checkbox32-filled {
+    cursor: pointer;
+}
+
+.left_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 16%;
+}
+
+.setting_header {
+    font-size: 53px;
 }
