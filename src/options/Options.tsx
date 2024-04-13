@@ -62,8 +62,8 @@ function Options() {
             </div>
         </div>
         <Setup />
+        <p className="features_header">Features:</p>
         <div className="features">
-          <p className="features_header">Features:</p>
           <Feature feature={"Generate Summary"} checked={summary} setChecked={setSummary}/>
           <Feature feature={"Generate Key Terms"} checked={keyTerms} setChecked={setKeyTerms}/>
           <Feature feature={"Generate Reflection Questions"} checked={questions} setChecked={setQuestions}/>

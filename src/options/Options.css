@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 .container {
     height: 100%;
@@ -27,4 +28,46 @@
 
 .setting_header {
     font-size: 53px;
+    margin: 0;
+}
+
+.setup {
+    display: flex;
+    flex-direction: column;
+}
+
+.setup_header, .features_header{
+    font-size: 40px;
+    border-bottom: 4px solid #C1C1C1;
+    margin: 0;
+    padding: 25px 0 15px 0;
+}
+
+.apikey_label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    width: 15%
+}
+
+.apikey_input {
+    border-radius: 5px;
+    width: 85%;
+    border: none;
+    background-color:#F1F1F1;
+}
+
+form {
+    width: 100%;
+}
+
+.feature {
+    display: flex;
+    justify-content: start;
+}
+
+.feature_name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
 }
