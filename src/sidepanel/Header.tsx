@@ -12,14 +12,27 @@ function Header() {
         <div id='header-top' className='header-top'>
           <div id='header-top-logo' className='header-top-logo'>
             <img id='sloth60' className='logo' src='../icons/playful-ui/sloth/sloth60.svg'></img>
-            <h1 id='title' className='logo-title'>LazyReader</h1>
+            <h1 id='title' className='heading-text'>LazyReader</h1>
           </div>
           <div id='header-top-buttons' className='header-top-buttons'>
             <img id='settings32' className='button' src='../icons/playful-ui/settings/settings32.svg' onClick={handleClick}></img>
-            <img id='close32' className='button' src='../icons/playful-ui/close/close32.svg'></img>
           </div>
         </div>
-        <div id='header-bottom' className='header-bottom'></div>
+        <div id='header-bottom' className='header-bottom'>
+          <div id='header-bottom-options' className='header-bottom-options'>
+            <img id='bullet' className='button' src='../icons/playful-ui/bullet/bullet32-filled.svg'></img>
+            <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32.svg'></img>
+            <div id='reading-level-container' className='reading-level-container'>
+              <h1 id='reading-level-text' className='dropdown-text'>Lvl:</h1>
+              <img id='reading-level-dropdown' className='reading-level-dropdown' src='../icons/playful-ui/dropdown/reading-level-dropdown.svg'></img>
+            </div>
+            <div id='length-container' className='length-container'>
+              <h1 id='length-text' className='dropdown-text'>Len:</h1>
+              <img id='length-dropdown' className='length-dropdown' src='../icons/playful-ui/dropdown/length-dropdown.svg'></img>
+            </div>
+          </div>
+          <img id='checkbox32' className='button' src='../icons/playful-ui/checkbox/checkbox32-checked-filled.svg'></img>
+        </div>
       </div>
   );
 }
