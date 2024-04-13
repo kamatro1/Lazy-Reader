@@ -48,6 +48,7 @@ function Options() {
 
   const handleClick = () => {
     console.log("CLOSED");
+    window.close();
   };
 
   return (

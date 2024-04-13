@@ -19,6 +19,14 @@
     cursor: pointer;
 }
 
+#close32 {
+    height: 64px;
+}
+
+#checkbox32, #checkbox32-filled {
+    height: 32px;
+}
+
 .left_header {
     display: flex;
     justify-content: space-between;
@@ -29,6 +37,7 @@
 .setting_header {
     font-size: 53px;
     margin: 0;
+    margin-left: 20px;
 }
 
 .setup {
@@ -40,14 +49,15 @@
     font-size: 40px;
     border-bottom: 4px solid #C1C1C1;
     margin: 0;
-    padding: 25px 0 15px 0;
+    padding: 25px 0 15px 5px;
 }
 
 .apikey_label {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
     font-size: 24px;
-    width: 15%
+    width: 25%;
+    margin: auto;
 }
 
 .apikey_input {
@@ -55,19 +65,31 @@
     width: 85%;
     border: none;
     background-color:#F1F1F1;
+    padding: 10px 20px;
 }
 
 form {
     width: 100%;
+    display: flex;
+    padding: 30px 0 30px 5px;
+}
+
+.features {
+    padding: 20px 10px;
 }
 
 .feature {
     display: flex;
     justify-content: start;
+    height: 50px;
+    margin-bottom: 10px;
 }
 
 .feature_name {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
     font-size: 24px;
+    margin: 0;
+    padding-top: 7px;
+    margin-left: 15px;
 }
