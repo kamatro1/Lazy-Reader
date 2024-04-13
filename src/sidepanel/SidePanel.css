@@ -125,7 +125,7 @@
 
   .content {
     background-color: #ffffff;
-    height: 690px;
+    height: 705px;
     border-radius: 10px;
     border: 2px solid #000000;
     position: relative;
@@ -148,7 +148,7 @@
   .summary-text-box {
     background-color: #f1f1f1;
     border-radius: 10px;
-    height: 620px;
+    height: 630px;
     width: calc(100% - 20px);
   }
 
