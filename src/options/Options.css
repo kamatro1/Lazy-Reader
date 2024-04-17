@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-#close32, #checkbox32, #checkbox32-filled {
+#close32, #checkbox32, #checkbox32-filled, #playful, #plain, #unchecked-grey, #unchecked-red, #unchecked-blue, #unchecked-yellow {
     cursor: pointer;
 }
 
@@ -45,11 +45,18 @@
     flex-direction: column;
 }
 
-.setup_header, .features_header{
+.setup_header, .features_header, .display_options_header {
     font-size: 40px;
     border-bottom: 4px solid #C1C1C1;
     margin: 0;
+}
+
+.setup_header {
     padding: 25px 0 15px 5px;
+}
+
+.features_header, .display_options_header {
+    padding: 0, 0, 15px, 5px;
 }
 
 .apikey_label {
@@ -85,11 +92,20 @@ form {
     margin-bottom: 10px;
 }
 
-.feature_name {
+.feature_name,.theme_header, .theme_colors_header {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
     font-size: 24px;
     margin: 0;
     padding-top: 7px;
     margin-left: 15px;
+}
+
+.theme, .theme_colors {
+    display: flex;
+    margin-top: 20px;
+}
+
+.playful-setting-icon, .color-icon{
+    padding-left: 15px;
 }
