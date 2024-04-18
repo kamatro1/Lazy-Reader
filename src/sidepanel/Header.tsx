@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './SidePanel.css';
 
 
 function Header() {
   const [bulletPoint, setBulletPoints] = useState<boolean>(true);
   const [checkbox, setCheckbox] = useState<boolean>(false);
+  const [apiKey, setApiKey] = useState<string>('');
+
+  useEffect(() => {
+    const settings = JSON.parse(localStorage.getItem("settings") || '""')
+    console.log(settings);
+    if (typeof(settings) === "object") {
+      setApiKey(settings.apiKey);
+    }
+      console.log("HEADER")
+      console.log({apiKey : apiKey})
+  }, [apiKey])
   
   const handleClick = () => {
     chrome.runtime.openOptionsPage();
