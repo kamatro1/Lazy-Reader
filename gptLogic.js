@@ -2,14 +2,14 @@
  * Sends a request to the OpenAI API to generate a response based on the provided parameters.
  *
  * @param {string} apiKey - The API key for authentication. Throws a detailed error if incorrect.
- * @param {string} model - The OpenAI model to use for generating the response. Allowed values: "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo".
- * @param {string} responseType - The type of response to generate. Allowed values: "summarization", "questions", "terms".
+ * @param {string} model - The OpenAI model to use for generating the response. Allowed values: "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo" (default).
+ * @param {string} responseType - The type of response to generate. Allowed values: "summarization" (default), "questions", "terms".
  * @param {string} content - The selected/page text to be concatenated to the end of the prompt.
- * @param {string} format - The format of the generated response. Allowed values: "bullet points", "paragraph".
+ * @param {string} format - The format of the generated response. Allowed values: "bullet points" (default), "paragraph".
  *                          Only applicable when responseType is "summarization".
- * @param {string} readingLevel - The reading level of the generated response. Allowed values: "beginner", "medium", "advanced".
+ * @param {string} readingLevel - The reading level of the generated response. Allowed values: "beginner", "intermediate" (default), "advanced".
  *                                Only applicable when responseType is "summarization".
- * @param {string} length - The desired length of the generated response. Allowed values: "concise", "regular", "detailed".
+ * @param {string} length - The desired length of the generated response. Allowed values: "concise", "regular" (default), "detailed".
  *                          Only applicable when responseType is "summarization".
  * @param {function} sendResponse - The callback function to send the API response back to the caller.
  */
@@ -32,7 +32,7 @@ function getGPTResponse(apiKey, model, responseType, content, format, readingLev
       promptPrefix += "The summary should be written in the complexity and detailed required";
       if (readingLevel === "beginner") {
         promptPrefix += " for a 5th grader.";
-      } else if (readingLevel === "medium") {
+      } else if (readingLevel === "intermediate") {
         promptPrefix += " for a high schooler.";
       } else if (readingLevel === "advanced") {
         promptPrefix += " for a university graduate.";
