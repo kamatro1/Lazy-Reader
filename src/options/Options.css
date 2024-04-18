@@ -1,10 +1,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
-.options {
-    width: 100%;
+.container {
     height: 100%;
+    font-family: 'Gamja Flower', sans-serif;
+    padding: 25px 50px;
 }
 
 .header {
-    font-family: 'Gamja Flower', sans-serif;
+    height: 20%;
+    border-bottom: 4px solid #C1C1C1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#close32, #checkbox32, #checkbox32-filled, #playful, #plain, #unchecked-grey, #unchecked-red, #unchecked-blue, #unchecked-yellow {
+    cursor: pointer;
+}
+
+#close32 {
+    height: 64px;
+}
+
+#checkbox32, #checkbox32-filled {
+    height: 32px;
+}
+
+.left_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 16%;
+}
+
+.setting_header {
+    font-size: 53px;
+    margin: 0;
+    margin-left: 20px;
+}
+
+.setup {
+    display: flex;
+    flex-direction: column;
+}
+
+.setup_header, .features_header, .display_options_header {
+    font-size: 40px;
+    border-bottom: 4px solid #C1C1C1;
+    margin: 0;
+}
+
+.setup_header {
+    padding: 25px 0 15px 5px;
+}
+
+.features_header, .display_options_header {
+    padding: 0, 0, 15px, 5px;
+}
+
+.apikey_label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    width: 25%;
+    margin: auto;
+}
+
+.apikey_input {
+    border-radius: 5px;
+    width: 85%;
+    border: none;
+    background-color:#F1F1F1;
+    padding: 10px 20px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    padding: 30px 0 30px 5px;
+}
+
+.features {
+    padding: 20px 10px;
+}
+
+.feature {
+    display: flex;
+    justify-content: start;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.feature_name,.theme_header, .theme_colors_header {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0;
+    padding-top: 7px;
+    margin-left: 15px;
+}
+
+.theme, .theme_colors {
+    display: flex;
+    margin-top: 20px;
+}
+
+.playful-setting-icon, .color-icon{
+    padding-left: 15px;
 }
