@@ -4,10 +4,12 @@ import Header from './Header';
 import Content from './Content';
 
 function SidePanel() {
+  const [summaryText, setSummaryText] = useState<string>('');
+
   return (
     <div>
-      <Header />
-      <Content />
+      <Header setSummaryText={setSummaryText}/>
+      <Content summaryText={summaryText}/>
     </div>
   );
 }
