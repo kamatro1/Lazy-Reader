@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './SidePanel.css';
-
+import DropdownMenu from './Dropdown';
 
 function Header() {
   const [bulletPoint, setBulletPoints] = useState<boolean>(true);
@@ -38,11 +38,11 @@ function Header() {
             {!bulletPoint ? <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32-filled.svg'></img> : <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32.svg' onClick={() => setBulletPoints(!bulletPoint)} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/paragraph/paragraph32-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/paragraph/paragraph32.svg')}></img>}
             <div id='reading-level-container' className='reading-level-container'>
               <h1 id='reading-level-text' className='dropdown-text'>Lvl:</h1>
-              <img id='reading-level-dropdown' className='reading-level-dropdown' src='../icons/playful-ui/dropdown/reading-level-dropdown.svg'></img>
+              <DropdownMenu initialImageSrc='../icons/playful-ui/dropdown/reading-level-dropdown/reading-level-dropdown.svg' optionType='readingLevel'/>
             </div>
             <div id='length-container' className='length-container'>
               <h1 id='length-text' className='dropdown-text'>Len:</h1>
-              <img id='length-dropdown' className='length-dropdown' src='../icons/playful-ui/dropdown/length-dropdown.svg'></img>
+              <DropdownMenu initialImageSrc='../icons/playful-ui/dropdown/length-dropdown/length-dropdown.svg' optionType='length'/>            
             </div>
           </div>
           {checkbox ? <img id='checkbox32' className='button' src='../icons/playful-ui/checkbox/checkbox32-checked-filled.svg'></img> : <img id='checkbox32' className='button' src='../icons/playful-ui/checkbox/checkbox32-checked.svg' onClick={() => setCheckbox(!checkbox)} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/checkbox/checkbox32-checked-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/checkbox/checkbox32-checked.svg')}></img>}
