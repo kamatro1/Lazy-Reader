@@ -8,8 +8,8 @@ function SidePanel() {
 
   return (
     <div>
-      <Header setSummaryText={setSummaryText}/>
-      <Content summaryText={summaryText}/>
+      <Header setSummaryText={setSummaryText} />
+      <Content summaryText={summaryText} />
     </div>
   );
 }

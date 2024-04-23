@@ -3,6 +3,7 @@ chrome.sidePanel
   .catch((error) => console.error(error));
 
 chrome.runtime.onInstalled.addListener(() => {
+  chrome.runtime.openOptionsPage();
   console.log("I just installed my chrome extension")
 })
 
@@ -22,22 +23,22 @@ chrome.runtime.onInstalled.addListener(() => {
  *                          Only applicable when responseType is "summarization".
  * @param {function} sendResponse - The callback function to send the API response back to the caller.
  */
-function getGPTResponse(apiKey:string, model:string, responseType:string, content:string, format:string, readingLevel:string, length:string, sendResponse:any) {
+function getGPTResponse(apiKey: string, model: string, responseType: string, content: string, format: string, readingLevel: string, length: string, sendResponse: any) {
   let promptPrefix = "";
- 
+
   if (responseType === "summarization") {
     promptPrefix = "Please provide a summary of the following text, which will be provided after the instructions, denoted by a ```."
-    + " The summary should be written with clarity and conciseness."
-    + " It should incorporate main ideas and essential information, eliminating extraneous language and focusing on critical aspects."
-    + " Rely strictly on the provided text, without including external information."
+      + " The summary should be written with clarity and conciseness."
+      + " It should incorporate main ideas and essential information, eliminating extraneous language and focusing on critical aspects."
+      + " Rely strictly on the provided text, without including external information."
 
-    + " The summary format must be";  
+      + " The summary format must be";
     if (format === "bullet points") {
       promptPrefix += " in bullet points.";
     } else if (format === "paragraph") {
       promptPrefix += " in paragraph(s). Seperate different paragraphs with a new line.";
     }
-    
+
     promptPrefix += "The summary should be written in the complexity and detailed required";
     if (readingLevel === "beginner") {
       promptPrefix += " for a 5th grader.";
@@ -65,71 +66,71 @@ function getGPTResponse(apiKey:string, model:string, responseType:string, conten
 
   let data = {
     "model": model,
-    "messages": [{"role": "user", "content": promptPrefix + content}]
+    "messages": [{ "role": "user", "content": promptPrefix + content }]
   };
 
   let requestBody = JSON.stringify(data);
 
   fetch("https://api.openai.com/v1/chat/completions", {
-  method: "POST",
-  headers: {
-    "Authorization": "Bearer " + apiKey,
-    "Content-Type": "application/json"
-  },
-  body: requestBody
-})
-.then(res => {
-  if (!res.ok) {
-    return res.json().then(errorData => {
-      if (errorData.error && errorData.error.code === "invalid_api_key") {
-        throw new Error("Invalid API key. Please provide a valid OpenAI API key.");
-      } else {
-        throw new Error("API request failed.");
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + apiKey,
+      "Content-Type": "application/json"
+    },
+    body: requestBody
+  })
+    .then(res => {
+      if (!res.ok) {
+        return res.json().then(errorData => {
+          if (errorData.error && errorData.error.code === "invalid_api_key") {
+            throw new Error("Invalid API key. Please provide a valid OpenAI API key.");
+          } else {
+            throw new Error("API request failed.");
+          }
+        });
       }
+      return res.json();
+    })
+    .then((res) => {
+      var result = "No response";
+      if (res.choices) {
+        result = res.choices[0].message.content;
+      }
+      console.log("[Background] sending response: " + result);
+      sendResponse({ result: result });
+    })
+    .catch(err => {
+      console.log("error: " + err);
+      sendResponse({ result: err.message });
     });
-  }
-  return res.json();
-})
-.then((res) => {
-  var result = "No response";
-  if (res.choices) {
-    result = res.choices[0].message.content;
-  }
-  console.log("[Background] sending response: " + result);
-  sendResponse({ result: result });
-})
-.catch(err => {
-  console.log("error: " + err);
-  sendResponse({ result: err.message });
-});
 }
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-if (request.type === "getResponse") {
-  console.log("[Background] Getting response");
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.type === "getResponse") {
+    console.log("[Background] Getting response");
 
-  const { body } = request;
-  const apiKey = body.apiKey;
-  const model = body.model;
-  const responseType = body.responseType;
-  const content = body.content;
-  const format = body.format;
-  const readingLevel = body.readingLevel;
-  const length = body.length;
+    const { body } = request;
+    const apiKey = body.apiKey;
+    const model = body.model;
+    const responseType = body.responseType;
+    const content = body.content;
+    const format = body.format;
+    const readingLevel = body.readingLevel;
+    const length = body.length;
 
-  console.log("[Background] API_KEY: " + apiKey);
-  console.log("[Background] Model: " + model);
-  console.log("[Background] Response Type: " + responseType);
-  console.log("[Background] Content: " + content);
-  console.log("[Background] Format: " + format);
-  console.log("[Background] Reading Level: " + readingLevel);
-  console.log("[Background] Length: " + length);
+    console.log("[Background] API_KEY: " + apiKey);
+    console.log("[Background] Model: " + model);
+    console.log("[Background] Response Type: " + responseType);
+    console.log("[Background] Content: " + content);
+    console.log("[Background] Format: " + format);
+    console.log("[Background] Reading Level: " + readingLevel);
+    console.log("[Background] Length: " + length);
 
-  getGPTResponse(apiKey, model, responseType, content, format, readingLevel, length, sendResponse);
-}
-return true;
+    getGPTResponse(apiKey, model, responseType, content, format, readingLevel, length, sendResponse);
+  }
+  return true;
 });
 
 console.log("[Background] Loaded script");
 
-export {};
+export { };
