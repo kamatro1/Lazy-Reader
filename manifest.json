@@ -20,7 +20,7 @@
       }
     },
     "permissions": [
-      "sidePanel"
+      "sidePanel", "activeTab"
     ],
     "side_panel": {
       "default_path": "js/sidepanel.html"
@@ -32,8 +32,9 @@
     
     "content_scripts": [
       {
+        "js": ["content_script.js"],
         "matches": ["<all_urls>"],
-        "js": ["content.js"]
+        "all_frames": true
       }
     ]
   }
