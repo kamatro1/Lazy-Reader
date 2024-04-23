@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './SidePanel.css';
+import DropdownMenu from './Dropdown';
 
 interface HeaderProps {
   setSummaryText: (arg0: string) => void
@@ -63,16 +64,17 @@ function Header({ setSummaryText }: HeaderProps) {
         </div>
       </div>
       <div id='header-bottom' className='header-bottom'>
-        <div id='header-bottom-options' className='header-bottom-options'>
-          {bulletPoint ? <img id='bullet' className='button' src='../icons/playful-ui/bullet/bullet32-filled.svg'></img> : <img id='bullet' className='button' src='../icons/playful-ui/bullet/bullet32.svg' onClick={() => setBulletPoints(!bulletPoint)} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/bullet/bullet32-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/bullet/bullet32.svg')}></img>}
-          {!bulletPoint ? <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32-filled.svg'></img> : <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32.svg' onClick={() => setBulletPoints(!bulletPoint)} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/paragraph/paragraph32-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/paragraph/paragraph32.svg')}></img>}
-          <div id='reading-level-container' className='reading-level-container'>
-            <h1 id='reading-level-text' className='dropdown-text'>Lvl:</h1>
-            <img id='reading-level-dropdown' className='reading-level-dropdown' src='../icons/playful-ui/dropdown/reading-level-dropdown.svg'></img>
-          </div>
-          <div id='length-container' className='length-container'>
-            <h1 id='length-text' className='dropdown-text'>Len:</h1>
-            <img id='length-dropdown' className='length-dropdown' src='../icons/playful-ui/dropdown/length-dropdown.svg'></img>
+          <div id='header-bottom-options' className='header-bottom-options'>
+            {bulletPoint ? <img id='bullet' className='button' src='../icons/playful-ui/bullet/bullet32-filled.svg'></img> : <img id='bullet' className='button' src='../icons/playful-ui/bullet/bullet32.svg' onClick={() => setBulletPoints(!bulletPoint)} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/bullet/bullet32-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/bullet/bullet32.svg')}></img>}
+            {!bulletPoint ? <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32-filled.svg'></img> : <img id='paragraph' className='button' src='../icons/playful-ui/paragraph/paragraph32.svg' onClick={() => setBulletPoints(!bulletPoint)} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/paragraph/paragraph32-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/paragraph/paragraph32.svg')}></img>}
+            <div id='reading-level-container' className='reading-level-container'>
+              <h1 id='reading-level-text' className='dropdown-text'>Lvl:</h1>
+              <DropdownMenu initialImageSrc='../icons/playful-ui/dropdown/reading-level-dropdown/reading-level-dropdown.svg' optionType='readingLevel'/>
+            </div>
+            <div id='length-container' className='length-container'>
+              <h1 id='length-text' className='dropdown-text'>Len:</h1>
+              <DropdownMenu initialImageSrc='../icons/playful-ui/dropdown/length-dropdown/length-dropdown.svg' optionType='length'/>            
+            </div>
           </div>
         </div>
         {checkbox ? <img id='checkbox32' className='button' src='../icons/playful-ui/checkbox/checkbox32-checked-filled.svg'></img> : <img id='checkbox32' className='button' src='../icons/playful-ui/checkbox/checkbox32-checked.svg' onClick={handleClickGenerate} onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/checkbox/checkbox32-checked-filled.svg')} onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/checkbox/checkbox32-checked.svg')}></img>}
