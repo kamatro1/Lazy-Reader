@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './SidePanel.css';
 
-function Content() {
+interface ContentProps {
+  summaryText : string
+}
+
+function Content({ summaryText } : ContentProps) {
   const [copy, setCopy] = useState<boolean>(false);
 
   return (
@@ -19,6 +23,7 @@ function Content() {
           onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/copy/copy32.svg')}></img>}
       </div>
       <div id ='summary-text-box' className='summary-text-box'>
+        {summaryText}
       </div>
     </div>
   );
