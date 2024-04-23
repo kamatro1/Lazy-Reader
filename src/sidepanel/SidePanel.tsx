@@ -1,16 +1,15 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import './SidePanel.css';
 import Header from './Header';
 import Content from './Content';
 
 function SidePanel() {
-    useEffect(() => {
-        console.log("SIDE BAR OPENED")
-    }, [])
+  const [summaryText, setSummaryText] = useState<string>('');
+
   return (
     <div>
-      <Header />
-      <Content />
+      <Header setSummaryText={setSummaryText} />
+      <Content summaryText={summaryText} />
     </div>
   );
 }
