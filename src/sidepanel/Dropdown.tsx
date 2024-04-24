@@ -1,36 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './SidePanel.css';
+import { SettingsContext } from './SidePanel';
 
 interface DropdownMenuProps {
-    initialImageSrc: string;
-    readingLvl?: string;
-    setReadingLvl?: (arg0: string) => void;
-    length?: string;
-    setLength?: (arg0: string) => void;
+    setValue: (arg0: string) => void;
     optionType: 'readingLevel' | 'length';
 }
 
-function DropdownMenu({ initialImageSrc, readingLvl = '', setReadingLvl = () => {}, length = '', setLength = () => {}, optionType} : DropdownMenuProps) {
-    const [imageSrc, setImageSrc] = useState(initialImageSrc);
+function DropdownMenu({ setValue, optionType }: DropdownMenuProps) {
+    const { playful } = useContext(SettingsContext);
+    const [imageSrc, setImageSrc] = useState('');
     
-    const handleOptionChange = (option: string) => {
-        if (optionType === 'readingLevel') {
-            setReadingLvl(option);
-            handleReadingLevelChange(option);
-        } else if (optionType === 'length') {
-            setLength(option);
-            handleLengthChange(option);
-        }
-    };
-    
-    const handleReadingLevelChange = (level: string) => {
-        const imagePath = `../icons/playful-ui/dropdown/reading-level-dropdown/reading-level-dropdown-${level.charAt(0)}.svg`;
+    useEffect(() => {
+        const imagePath = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/dropdown/${optionType}-dropdown/${optionType}-dropdown.svg`;
         setImageSrc(imagePath);
-    };
-    
-    const handleLengthChange = (length: string) => {
-        const imagePath = `../icons/playful-ui/dropdown/length-dropdown/length-dropdown-${length}.svg`;
+    }, [playful, optionType]);
+
+    const handleOptionChange = (option: string) => {
+        setValue(option);
+        const imagePath = playful 
+            ? `../icons/playful-ui/dropdown/${optionType}-dropdown/${optionType}-dropdown-${option.charAt(0)}.svg` 
+            : `../icons/plain-ui/dropdown/${optionType}-dropdown/${optionType}-dropdown-${option.charAt(0)}.svg`;
         setImageSrc(imagePath);
     };
     

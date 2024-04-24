@@ -18,10 +18,6 @@
     overflow-y: hidden;
   }
 
-  body {
-    font-family: 'Gamja Flower', sans-serif;
-  }
-
   .header {
     background-color: #ffffff;
     height: 120px;
@@ -54,10 +50,6 @@
     width: 60px;
     margin-left: 5px;
     margin-right: 10px;
-  }
-
-  .heading-text {
-    font-size: 31px;
   }
 
   .header-top-buttons {

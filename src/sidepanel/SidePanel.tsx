@@ -1,16 +1,59 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useState, createContext, useContext } from 'react';
 import './SidePanel.css';
 import Header from './Header';
 import Content from './Content';
 
-function SidePanel() {
-  const [summaryText, setSummaryText] = useState<string>('');
+export const SettingsContext = createContext<{
+  apiKey: string;
+  summary: boolean;
+  keyTerms: boolean;
+  questions: boolean;
+  playful: boolean;
+  colorTheme: string;
+}>({
+  apiKey: '',
+  summary: false,
+  keyTerms: false,
+  questions: false,
+  playful: true,
+  colorTheme: 'grey',
+});
+
+function SidePanelContent() {
+  const [summaryText, setSummaryText] = useState('');
+  const { playful } = useContext(SettingsContext);
+  const bodyStyle = {
+    fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
+  };
+
 
   return (
-    <div>
+    <div id='sidePanel' className={`side-panel ${playful ? 'playful' : 'plain'}`} style={bodyStyle}>
       <Header setSummaryText={setSummaryText} />
       <Content summaryText={summaryText} />
     </div>
+  );
+}
+
+function SidePanel() {
+  const [settings, setSettings] = useState({
+    apiKey: '',
+    summary: false,
+    keyTerms: false,
+    questions: false,
+    playful: true,
+    colorTheme: 'grey',
+  });
+
+  useEffect(() => {
+    const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');
+    setSettings(storedSettings);
+  }, []);
+
+  return (
+    <SettingsContext.Provider value={settings}>
+      <SidePanelContent />
+    </SettingsContext.Provider>
   );
 }
 
