@@ -28,15 +28,30 @@ function Content({ summaryText } : ContentProps) {
     <div id='content' className='content'>
       <div id='summary-header' className='summary-header'>
         <h1 id='summary-heading' style={headingTextStyle}>Summary:</h1>
-        {copy ? <img id='copy32' className='button' src='../icons/playful-ui/copy/copy32-checked.svg'></img> : <img id='copy32' className='button' src='../icons/playful-ui/copy/copy32.svg' 
+        <img 
+          id='copy32' 
+          className='button'
+          alt='copy' 
+          src={copy 
+            ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked.svg` 
+            : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
           onClick={() => {
             setCopy(true);
             setTimeout(() => {
               setCopy(false);
             }, 3000);
           }} 
-          onMouseOver={e => (e.currentTarget.src = '../icons/playful-ui/copy/copy32-filled.svg')} 
-          onMouseOut={e => (e.currentTarget.src = '../icons/playful-ui/copy/copy32.svg')}></img>}
+          onMouseOver={(e) => {
+            if (!copy) {
+              e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled.svg`;
+            }
+          }} 
+          onMouseOut={(e) => {
+            if (!copy) {
+              e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
+            }
+          }}
+        />
       </div>
       <div id ='summary-text-box' className='summary-text-box'>
         {summaryText}
