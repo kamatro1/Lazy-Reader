@@ -9,25 +9,31 @@ interface DropdownMenuProps {
 }
 
 function DropdownMenu({ setValue, optionType }: DropdownMenuProps) {
-    const { playful } = useContext(SettingsContext);
+    const { playful, colorTheme } = useContext(SettingsContext);
     const [imageSrc, setImageSrc] = useState('');
-    
+
     useEffect(() => {
-        const imagePath = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/dropdown/${optionType}-dropdown/${optionType}-dropdown.svg`;
-        setImageSrc(imagePath);
-    }, [playful, optionType]);
+        updateImageSrc(playful, colorTheme, optionType);
+    }, [playful, colorTheme, optionType]);
+
+    const updateImageSrc = (playful: boolean, colorTheme: string, optionType: string) => {
+        const defaultTheme = playful ? 'playful-ui' : 'plain-ui';
+        const defaultImage = `../icons/${defaultTheme}/dropdown/${optionType}-dropdown/${optionType}-dropdown-${colorTheme}.svg`;
+        setImageSrc(defaultImage);
+    };
+
 
     const handleOptionChange = (option: string) => {
         setValue(option);
         const imagePath = playful 
-            ? `../icons/playful-ui/dropdown/${optionType}-dropdown/${optionType}-dropdown-${option.charAt(0)}.svg` 
-            : `../icons/plain-ui/dropdown/${optionType}-dropdown/${optionType}-dropdown-${option.charAt(0)}.svg`;
+            ? `../icons/playful-ui/dropdown/${optionType}-dropdown/${optionType}-dropdown-${option.charAt(0)}-${colorTheme}.svg` 
+            : `../icons/plain-ui/dropdown/${optionType}-dropdown/${optionType}-dropdown-${option.charAt(0)}-${colorTheme}.svg`;
         setImageSrc(imagePath);
     };
     
     return (
         <div className="dropdown" onClick={(e) => e.currentTarget.classList.add(':hover')}>
-            <img src={imageSrc} alt="Image" style={{ cursor: 'pointer' }} />
+            <img src={imageSrc} alt="dropdown" style={{ cursor: 'pointer' }} />
             <div className="dropdown-content">
                 {optionType === 'readingLevel' && (
                     <>

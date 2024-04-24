@@ -81,7 +81,7 @@ function Header({ setSummaryText }: HeaderProps) {
           alt='settings'
           src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32.svg`}
           onClick={handleClickClose}
-          onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32-filled.svg`)}
+          onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32-filled-${colorTheme}.svg`)}
           onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32.svg`)}
         />
         </div>
@@ -92,7 +92,7 @@ function Header({ setSummaryText }: HeaderProps) {
                             id='bullet'
                             className='button'
                             alt='bullet'
-                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled.svg`}>
+                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled-${colorTheme}.svg`}>
                           </img> : 
                           <img 
                             id='bullet'
@@ -100,14 +100,14 @@ function Header({ setSummaryText }: HeaderProps) {
                             alt='bullet'
                             src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32.svg`}
                             onClick={() => setBulletPoints(!bulletPoint)}
-                            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled.svg`)}
+                            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled-${colorTheme}.svg`)}
                             onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32.svg`)}>
                           </img>}
           {!bulletPoint ? <img 
                             id='paragraph'
                             className='button'
                             alt='paragraph'
-                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled.svg`}>
+                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled-${colorTheme}.svg`}>
                           </img> : 
                           <img 
                             id='paragraph'
@@ -115,7 +115,7 @@ function Header({ setSummaryText }: HeaderProps) {
                             alt='paragraph'
                             src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32.svg`}
                             onClick={() => setBulletPoints(!bulletPoint)}
-                            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled.svg`)}
+                            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled-${colorTheme}.svg`)}
                             onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32.svg`)}>
                           </img>}
           <div id='reading-level-container' className='reading-level-container'>
@@ -137,7 +137,7 @@ function Header({ setSummaryText }: HeaderProps) {
                       id='checkbox32'
                       className='button'
                       alt='checkbox'
-                      src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled.svg`}>
+                      src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`}>
                     </img> : 
                     <img 
                       id='checkbox32'
@@ -145,7 +145,7 @@ function Header({ setSummaryText }: HeaderProps) {
                       alt='checkbox'
                       src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`}
                       onClick={handleClickGenerate}
-                      onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled.svg`)}
+                      onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`)}
                       onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`)}>
                     </img>}
       </div>

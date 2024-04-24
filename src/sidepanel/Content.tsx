@@ -24,6 +24,25 @@ function Content({ summaryText } : ContentProps) {
     fontSize: playful ? '31px' : '24px', // adjust the font size for playful
   };
 
+  let backgroundColor;
+  switch (colorTheme) {
+    case 'blue':
+      backgroundColor = '#E4F1FF';
+      break;
+    case 'yellow':
+      backgroundColor = '#FFEDCB';
+      break;
+    case 'red':
+      backgroundColor = '#FFE9E9';
+      break;
+    default:
+      backgroundColor = '#F1F1F1';
+  }
+
+  const contentStyle = {
+    backgroundColor
+  }
+
   return (
     <div id='content' className='content'>
       <div id='summary-header' className='summary-header'>
@@ -33,7 +52,7 @@ function Content({ summaryText } : ContentProps) {
           className='button'
           alt='copy' 
           src={copy 
-            ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked.svg` 
+            ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
             : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
           onClick={() => {
             setCopy(true);
@@ -43,7 +62,7 @@ function Content({ summaryText } : ContentProps) {
           }} 
           onMouseOver={(e) => {
             if (!copy) {
-              e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled.svg`;
+              e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
             }
           }} 
           onMouseOut={(e) => {
@@ -53,7 +72,7 @@ function Content({ summaryText } : ContentProps) {
           }}
         />
       </div>
-      <div id ='summary-text-box' className='summary-text-box'>
+      <div id ='summary-text-box' className='summary-text-box' style={contentStyle}>
         {summaryText}
       </div>
     </div>
