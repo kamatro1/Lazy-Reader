@@ -18,10 +18,16 @@ interface HeaderProps {
 
 function Header({ setSummaryText }: HeaderProps) {
   const { apiKey, summary, keyTerms, questions, playful, colorTheme } = useContext(SettingsContext);
-  const [checkbox, setCheckbox] = useState<boolean>(false);
   const [bulletPoint, setBulletPoints] = React.useState<boolean>(true);
   const [readingLevel, setReadingLevel] = React.useState<string>('advanced');
   const [length, setLength] = React.useState<string>('regular');
+  const [checkbox, setCheckbox] = useState<boolean>(false);
+  const [isFirstGen, setIsFirstGen] = useState<boolean>(true);
+  const [iconSrc, setIconSrc] = useState('');
+
+  useEffect(() => {
+    setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`);
+  }, [playful]);
 
   const handleClickClose = () => {
     chrome.runtime.openOptionsPage();
@@ -35,7 +41,37 @@ function Header({ setSummaryText }: HeaderProps) {
     setLength(length);
   };
 
-  const handleClickGenerate = () => {
+  const handleGenerateClick = () => {
+    if (isFirstGen) {
+      setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`);
+      setTimeout(() => {
+        setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/refresh/refresh32.svg`);
+      }, 3000);
+    } else {
+      setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/refresh/refresh32.svg`);
+    }
+
+    setIsFirstGen(false);
+    handleGetResponse();
+  };
+
+  const handleGenerateHover = () => {
+    if (isFirstGen) {
+      setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`);
+    } else {
+      setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/refresh/refresh32-filled-${colorTheme}.svg`);
+    }
+  };
+
+  const handleGenerateHoverOut = () => {
+    if (isFirstGen) {
+      setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`);
+    } else {
+      setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/refresh/refresh32.svg`);
+    }
+  };
+
+  const handleGetResponse = () => {
     const content = 'Supreme Court showdowns. Closed-door negotiations. And millions of dollars in litigation. After months of legal and legislative skirmishes around the country, much of the redistricting drama of the 2024 election cycle is behind us. And it has ended pretty close to where it began: Just a handful of seats could determine which party controls the US House of Representatives, where Republicans now hold a threadbare majority.In North Carolina, newly empowered GOP state legislators took an aggressive approach with their map-drawing, crafting lines that are expected to allow their party to flip at least three seats now held by Democrats. But, in recently concluded redistricting in New York, Democrats, who had final say over the map, adopted a more modest position – essentially turning just one Republican-held seat a deeper shade of blue.In the South, Democrats are expected to gain two seats as a result of Voting Rights Act rulings out of Alabama and Louisiana. But a protracted battle over the congressional map in another Southern state, Georgia, has not changed the partisan balance of the state’s US House delegation heading into November.“It’s amazing that with all of the states where we’ve had things going on and with all the different lawsuits, we are really only talking about a small number of districts that are guaranteed to change hands as a result of this entire shuffle,” said Nick Seabrook, a political scientist at the University of North Florida and the author of the 2022 book “One Person, One Vote: A Surprising History of Gerrymandering in America.”'
     const body = {
       apiKey: apiKey,
@@ -133,21 +169,15 @@ function Header({ setSummaryText }: HeaderProps) {
             />            
           </div>
         </div>
-        {checkbox ? <img 
-                      id='checkbox32'
-                      className='button'
-                      alt='checkbox'
-                      src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`}>
-                    </img> : 
-                    <img 
-                      id='checkbox32'
-                      className='button'
-                      alt='checkbox'
-                      src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`}
-                      onClick={handleClickGenerate}
-                      onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`)}
-                      onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`)}>
-                    </img>}
+        <img
+            id='icon'
+            className='button'
+            alt={isFirstGen ? 'checkbox' : 'refresh'}
+            src={iconSrc}
+            onClick={handleGenerateClick}
+            onMouseOver={handleGenerateHover}
+            onMouseOut={handleGenerateHoverOut}
+          />
       </div>
     </div>
   );
