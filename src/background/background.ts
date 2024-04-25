@@ -193,7 +193,7 @@ chrome.runtime.onInstalled.addListener(() => {
     title: 'Capture Snippet', // Text to be displayed in the context menu
     contexts: ['selection'], // Show the context menu item only when text is selected
   });
-  
+
 // Listen for the context menu click event
   chrome.contextMenus.onClicked.addListener(function(info, tab) {
     console.log("[Background] Listening for onClicked");
