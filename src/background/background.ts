@@ -108,44 +108,51 @@ function getGPTResponse(apiKey: string, model: string, responseType: string, con
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === "getResponse") {
     console.log("[Background] Getting response");
-
     const { body } = request;
     const apiKey = body.apiKey;
     const model = body.model;
     const responseType = body.responseType;
-    const content = body.content;
     const format = body.format;
     const readingLevel = body.readingLevel;
     const length = body.length;
-
-    console.log("[Background] API_KEY: " + apiKey);
-    console.log("[Background] Model: " + model);
-    console.log("[Background] Response Type: " + responseType);
-    console.log("[Background] Content: " + content);
-    console.log("[Background] Format: " + format);
-    console.log("[Background] Reading Level: " + readingLevel);
-    console.log("[Background] Length: " + length);
-
-    getGPTResponse(apiKey, model, responseType, content, format, readingLevel, length, sendResponse);
+    // Retrieve the selected text from Chrome's local storage
+    chrome.storage.local.get('selectedText', function(result) {
+      const content = result.selectedText;
+      console.log("[Background] API_KEY: " + apiKey);
+      console.log("[Background] Model: " + model);
+      console.log("[Background] Response Type: " + responseType);
+      console.log("[Background] Content: " + content);
+      console.log("[Background] Format: " + format);
+      console.log("[Background] Reading Level: " + readingLevel);
+      console.log("[Background] Length: " + length);
+      getGPTResponse(apiKey, model, responseType, content, format, readingLevel, length, sendResponse);
+    });
   }
   return true;
 });
 
 console.log("[Background] Loaded script");
 
-function sendMessageToContentScript() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    if (tabs.length > 0) {
-      const activeTabId = tabs[0].id;
-      chrome.tabs.sendMessage(activeTabId, { type: 'ELEMENT_CLICKED' }, function (response) {
-        if (response && response.success) {
-          const pageText = response.text;
-          // Send the page text to the ChatGPT API for summarization
-          // ...
-        }
-      });
+chrome.runtime.onInstalled.addListener(() => {
+  // Create a context menu item
+  // See: https://developer.chrome.com/docs/extensions/reference/api/contextMenus#method-create
+  chrome.contextMenus.create({
+    id: 'captureSnippet', // Unique identifier for the context menu item
+    title: 'Capture Snippet', // Text to be displayed in the context menu
+    contexts: ['selection'], // Show the context menu item only when text is selected
+  });
+  
+// Listen for the context menu click event
+  chrome.contextMenus.onClicked.addListener(function(info, tab) {
+    console.log("[Background] Listening for onClicked");
+    if (info.menuItemId === "captureSnippet") {
+      console.log("[Background] Captured Snippet");
+      const selectedText = info.selectionText;
+      chrome.storage.local.set({ selectedText: selectedText });
     }
   });
-}
+});
+
+
 export { };
 

@@ -1,11 +1,15 @@
-function scrapePageContent() {
-  const pageContent = document.body.innerText;
-  chrome.runtime.sendMessage({ action: 'pageContentScraped', content: pageContent });
-}
+//function scrapePageContent() {
+//  const pageContent = document.body.innerText;
+//  chrome.runtime.sendMessage({ action: 'pageContentScraped', content: pageContent });
+//}
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'ELEMENT_CLICKED') {
-    scrapePageContent();
-    sendResponse({ success: true });
-  }
+//chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+//  if (request.type === 'ELEMENT_CLICKED') {
+//    scrapePageContent();
+//    sendResponse({ success: true });
+//  }
+//});
+
+chrome.storage.local.get("selectedText", function(data) {
+  const selectedText = data.selectedText;
 });
