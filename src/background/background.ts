@@ -168,7 +168,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     const readingLevel = body.readingLevel;
     const length = body.length;
     // Retrieve the selected text from Chrome's local storage
-    chrome.storage.local.get('selectedText', function(result) {
+    //chrome.storage.local.get('selectedText', function(result) {
+      chrome.storage.local.get('selectedText', function(result) {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+          sendResponse({ result: "Error retrieving selected text." });
+          return;
+        }
       const content = result.selectedText;
       console.log("[Background] API_KEY: " + apiKey);
       console.log("[Background] Model: " + model);
