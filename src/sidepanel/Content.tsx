@@ -12,7 +12,9 @@ interface SettingsContextValue {
 }
 
 interface ContentProps {
-  summaryText : string
+  summaryText: string;
+  // keyTermsText: string;
+  // questionsText: string;
 }
 
 function Content({ summaryText } : ContentProps) {
@@ -39,42 +41,124 @@ function Content({ summaryText } : ContentProps) {
       backgroundColor = '#F1F1F1';
   }
 
-  const contentStyle = {
-    backgroundColor
-  }
+  const contentStyle = { backgroundColor };
+
+  const summaryHeight = summary && !keyTerms && !questions ? 55 : (summary && keyTerms && questions ? 30 : 460);
+  const keyTermsHeight = keyTerms && !summary ? 33 : (keyTerms ? 12 : 0);
+  const questionsHeight = questions && !summary ? 33 : (questions ? 12 : 0);
+
+  const summaryTextBoxStyle = { height: `${summaryHeight}vh` };
+  const keyTermsTextBoxStyle = { height: `${keyTermsHeight}vh` };
+  const questionsTextBoxStyle = { height: `${questionsHeight}vh` };
 
   return (
     <div id='content' className='content'>
-      <div id='summary-header' className='summary-header'>
-        <h1 id='summary-heading' style={headingTextStyle}>Summary:</h1>
-        <img 
-          id='copy32' 
-          className='button'
-          alt='copy' 
-          src={copy 
-            ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
-            : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
-          onClick={() => {
-            setCopy(true);
-            setTimeout(() => {
-              setCopy(false);
-            }, 3000);
-          }} 
-          onMouseOver={(e) => {
-            if (!copy) {
-              e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
-            }
-          }} 
-          onMouseOut={(e) => {
-            if (!copy) {
-              e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
-            }
-          }}
-        />
-      </div>
-      <div id ='summary-text-box' className='summary-text-box' style={contentStyle}>
-        {summaryText}
-      </div>
+      {summary && (
+        <>
+          <div className='section'>
+            <div id='summary-header' className='feature-header'>
+              <h1 id='summary-heading' style={headingTextStyle}>Summary:</h1>
+              <img 
+                id='copy32' 
+                className='button'
+                alt='copy' 
+                src={copy 
+                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
+                  : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
+                onClick={() => {
+                  setCopy(true);
+                  setTimeout(() => {
+                    setCopy(false);
+                  }, 3000);
+                }} 
+                onMouseOver={(e) => {
+                  if (!copy) {
+                    e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
+                  }
+                }} 
+                onMouseOut={(e) => {
+                  if (!copy) {
+                    e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
+                  }
+                }}
+              />
+            </div>
+            <div id ='summary-text-box' className='feature-text-box' style={{ ...summaryTextBoxStyle, ...contentStyle }}>
+              {summaryText}
+            </div>
+          </div>
+        </>
+      )}
+
+      {keyTerms && (
+        <>
+          <div className='section'>
+            <div id='key-terms-header' className='feature-header'>
+              <h1 id='key-terms-heading' style={headingTextStyle}>Key Terms:</h1>
+              <img 
+                id='copy32' 
+                className='button'
+                alt='copy' 
+                src={copy 
+                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
+                  : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
+                onClick={() => {
+                  setCopy(true);
+                  setTimeout(() => {
+                    setCopy(false);
+                  }, 3000);
+                }} 
+                onMouseOver={(e) => {
+                  if (!copy) {
+                    e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
+                  }
+                }} 
+                onMouseOut={(e) => {
+                  if (!copy) {
+                    e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
+                  }
+                }}
+              />
+            </div>
+            <div id='key-terms-text-box' className='feature-text-box' style={{ ...keyTermsTextBoxStyle, ...contentStyle }}></div>
+          </div>
+        </>
+      )}
+
+      {questions && (
+        <>
+          <div className='section'>
+            <div id='questions-header' className='feature-header'>
+              <h1 id='questions-heading' style={headingTextStyle}>Reflection Questions:</h1>
+              <img 
+                id='copy32' 
+                className='button'
+                alt='copy' 
+                src={copy 
+                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
+                  : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
+                onClick={() => {
+                  setCopy(true);
+                  setTimeout(() => {
+                    setCopy(false);
+                  }, 3000);
+                }} 
+                onMouseOver={(e) => {
+                  if (!copy) {
+                    e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
+                  }
+                }} 
+                onMouseOut={(e) => {
+                  if (!copy) {
+                    e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
+                  }
+                }}
+              />
+            </div>
+            <div id='questions-text-box' className='feature-text-box' style={{ ...questionsTextBoxStyle, ...contentStyle }}></div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

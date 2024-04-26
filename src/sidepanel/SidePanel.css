@@ -148,26 +148,30 @@
     flex-direction: column;
     align-items: center;
   }
-
-  .summary-header {
+  
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    width: calc(100% - 20px);
+  }
+  
+  .feature-header {
     display: flex;
     height: 40px;
-    margin-bottom: 10px;
-    width: calc(100% - 20px);
     align-items: center;
     justify-content: space-between;
   }
-
-  .summary-text-box {
+  
+  .feature-text-box {
     background-color: #f1f1f1;
     border-radius: 10px;
-    height: 630px;
-    width: calc(100% - 20px);
+    /* min-height: 100px; */
   }
-
-  .summary-text {
+  
+  .feature-text {
     font-family: "Josefin Sans", sans-serif;
     font-size: 14px;
     font-style: normal; 
   }
- 
