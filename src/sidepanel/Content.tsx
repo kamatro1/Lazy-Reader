@@ -43,7 +43,7 @@ function Content({ summaryText } : ContentProps) {
 
   const contentStyle = { backgroundColor };
 
-  const summaryHeight = summary && !keyTerms && !questions ? 55 : (summary && keyTerms && questions ? 30 : 460);
+  const summaryHeight = summary && !keyTerms && !questions ? 74 : (summary && keyTerms && questions ? 30 : 55);
   const keyTermsHeight = keyTerms && !summary ? 33 : (keyTerms ? 12 : 0);
   const questionsHeight = questions && !summary ? 33 : (questions ? 12 : 0);
 
