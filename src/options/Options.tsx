@@ -4,12 +4,18 @@ import './Options.css'
 interface SetupProps {
   apiKey : string,
   setApiKey : (arg0 : string) => void
+  playful: boolean
 }
 
-function Setup({apiKey, setApiKey} : SetupProps) {
+function Setup({apiKey, setApiKey, playful} : SetupProps) {
+  const fontStyle = {
+    fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
+    fontSize: playful ? '40px' : '31px',
+  };
+
   return (
     <div className="setup">
-      <p className="setup_header">Setup:</p>
+      <p className="setup_header" style={fontStyle}>Setup:</p>
       <form>
         <label htmlFor="apikey" className='apikey_label'>Enter User API Key: </label>
         <input
@@ -27,15 +33,29 @@ function Setup({apiKey, setApiKey} : SetupProps) {
 interface FeatureProps {
   feature : string, 
   checked : boolean, 
-  setChecked : (arg0: boolean) => void 
+  setChecked : (arg0: boolean) => void,
+  playful: boolean
 }
 
-function Feature({ feature, checked, setChecked } : FeatureProps ) {    
+function Feature({ feature, checked, setChecked, playful } : FeatureProps ) {    
   return (
     <div className="feature">
-      {checked ? 
-        <img id='checkbox32-filled' className='logo' src='../icons/playful-ui/checkbox/checkbox32-checked-filled.svg' alt='Checked Box' onClick={() => setChecked(!checked)}></img> :
-        <img id='checkbox32' className='logo' src='../icons/playful-ui/checkbox/checkbox32-unchecked.svg' alt='Unchecked Box' onClick={() => setChecked(!checked)}></img> 
+      {checked ?
+        <img
+          id='checkbox32-filled'
+          className='logo'
+          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled.svg`}
+          alt='Checked Box'
+          onClick={() => setChecked(!checked)}
+        />
+        :
+        <img
+          id='checkbox32'
+          className='logo'
+          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked.svg`}
+          alt='Unchecked Box'
+          onClick={() => setChecked(!checked)}
+        />
       }
       <p className="feature_name">{feature}</p>
     </div>
@@ -50,9 +70,14 @@ interface DisplayOptionsProps {
 }
 
 function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : DisplayOptionsProps) {
+  const fontStyle = {
+    fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
+    fontSize: playful ? '40px' : '31px',
+  };
+  
   return (
     <div className="display_options">
-      <p className="display_options_header">
+      <p className="display_options_header" style={fontStyle}>
         Display Options:
       </p>
       <div className="theme">
@@ -64,14 +89,70 @@ function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : Displ
       </div>
       <div className="theme_colors">
         <p className="theme_colors_header">Theme Colors:</p>
-        {colorTheme === 'grey' ? <img id='checked-grey' src='../icons/playful-ui/checkbox/checkbox32-checked-filled.svg' alt='Checked Grey' className='color-icon'/> : 
-                                <img id='unchecked-grey' src='../icons/playful-ui/checkbox/checkbox32-unchecked.svg' alt='Unchecked Grey' className='color-icon'onClick={() => setColorTheme('grey')}/>}
-        {colorTheme === 'red' ? <img id='checked-red' src='../icons/playful-ui/checkbox/checkbox32-checked-filled-red.svg' alt='Checked red' className='color-icon'/> : 
-                                <img id='unchecked-red' src='../icons/playful-ui/checkbox/checkbox32-unchecked-red.svg' alt='Unchecked red' className='color-icon' onClick={() => setColorTheme('red')}/>}
-        {colorTheme === 'blue' ? <img id='checked-blue' src='../icons/playful-ui/checkbox/checkbox32-checked-filled-blue.svg' alt='Checked blue' className='color-icon'/> : 
-                                <img id='unchecked-blue' src='../icons/playful-ui/checkbox/checkbox32-unchecked-blue.svg' alt='Unchecked blue' className='color-icon' onClick={() => setColorTheme('blue')}/>}
-        {colorTheme === 'yellow' ? <img id='checked-yellow' src='../icons/playful-ui/checkbox/checkbox32-checked-filled-yellow.svg' alt='Checked yellow' className='color-icon'/> : 
-                                <img id='unchecked-yellow' src='../icons/playful-ui/checkbox/checkbox32-unchecked-yellow.svg' alt='Unchecked yellow' className='color-icon' onClick={() => setColorTheme('yellow')}/>}
+        {colorTheme === 'grey' ?
+          <img
+            id='checked-grey'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled.svg`}
+            alt='Checked Grey'
+            className='color-icon'
+          />
+          :
+          <img
+            id='unchecked-grey'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked.svg`}
+            alt='Unchecked Grey'
+            className='color-icon'
+            onClick={() => setColorTheme('grey')}
+          />
+        }
+        {colorTheme === 'red' ?
+          <img
+            id='checked-red'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-red.svg`}
+            alt='Checked red'
+            className='color-icon'
+          />
+          :
+          <img
+            id='unchecked-red'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked-red.svg`}
+            alt='Unchecked red'
+            className='color-icon'
+            onClick={() => setColorTheme('red')}
+          />
+        }
+        {colorTheme === 'blue' ?
+          <img
+            id='checked-blue'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-blue.svg`}
+            alt='Checked blue'
+            className='color-icon'
+          />
+          :
+          <img
+            id='unchecked-blue'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked-blue.svg`}
+            alt='Unchecked blue'
+            className='color-icon'
+            onClick={() => setColorTheme('blue')}
+          />
+        }
+        {colorTheme === 'yellow' ?
+          <img
+            id='checked-yellow'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-yellow.svg`}
+            alt='Checked yellow'
+            className='color-icon'
+          />
+          :
+          <img
+            id='unchecked-yellow'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked-yellow.svg`}
+            alt='Unchecked yellow'
+            className='color-icon'
+            onClick={() => setColorTheme('yellow')}
+          />
+        }
       </div>
     </div>
   )
@@ -84,6 +165,14 @@ function Options() {
   const [questions, setQuestions] = useState<boolean>(false);
   const [playful, setPlayful] = useState<boolean>(true);
   const [colorTheme, setColorTheme] = useState<string>('grey');
+  const fontStyle = {
+    fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
+    fontSize: playful ? '53px' : '40px',
+  };
+  const fontStyle2 = {
+    fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
+    fontSize: playful ? '40px' : '31px',
+  };
 
   useEffect(() => {
     const settings = JSON.parse(localStorage.getItem("settings") || '""')
@@ -115,24 +204,55 @@ function Options() {
   };
 
   return (
-    <div className="container">
-        <div className="header">
-            <div className="left_header">
-              <img id='sloth128' className='logo' src='../icons/playful-ui/sloth/sloth128.svg' alt='Sloth Logo'></img>
-              <p className="setting_header">Settings</p>
-            </div>
-            <div className="right_header">
-              <img id='close32' className='logo' src='../icons/playful-ui/close/close32.svg' alt='Closed Icon' onClick={handleClick}></img>
-            </div>
+    <div className={`container ${playful ? 'playful' : 'plain'}`}>
+      <div className="header">
+        <div className="left_header">
+          <img
+            id='sloth128'
+            className='logo'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/sloth/sloth128.svg`}
+            alt='Sloth Logo'
+          />
+          <p className="setting_header" style={fontStyle}>Settings</p>
         </div>
-        <Setup apiKey={apiKey} setApiKey={setApiKey}/>
-        <p className="features_header">Features:</p>
-        <div className="features">
-          <Feature feature={"Generate Summary"} checked={summary} setChecked={setSummary}/>
-          <Feature feature={"Generate Key Terms"} checked={keyTerms} setChecked={setKeyTerms}/>
-          <Feature feature={"Generate Reflection Questions"} checked={questions} setChecked={setQuestions}/>
+        <div className="right_header">
+          <img
+            id='close64'
+            className='logo'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/close/close64.svg`}
+            alt='Closed Icon'
+            onClick={handleClick}
+          />
         </div>
-        <DisplayOptions playful={playful} setPlayful={setPlayful} colorTheme={colorTheme} setColorTheme={setColorTheme}/>
+      </div>
+      <Setup apiKey={apiKey} setApiKey={setApiKey} playful={playful}/>
+      <p className="features_header" style={fontStyle2}>Features:</p>
+      <div className="features">
+        <Feature
+          feature={"Generate Summary"}
+          checked={summary}
+          setChecked={setSummary}
+          playful={playful}
+        />
+        <Feature
+          feature={"Generate Key Terms"}
+          checked={keyTerms}
+          setChecked={setKeyTerms}
+          playful={playful}
+        />
+        <Feature
+          feature={"Generate Reflection Questions"}
+          checked={questions}
+          setChecked={setQuestions}
+          playful={playful}
+        />
+      </div>
+      <DisplayOptions
+        playful={playful}
+        setPlayful={setPlayful}
+        colorTheme={colorTheme}
+        setColorTheme={setColorTheme}
+      />
     </div>
   )
 }

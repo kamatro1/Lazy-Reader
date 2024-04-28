@@ -15,11 +15,11 @@
     align-items: center;
 }
 
-#close32, #checkbox32, #checkbox32-filled, #playful, #plain, #unchecked-grey, #unchecked-red, #unchecked-blue, #unchecked-yellow {
+#close64, #checkbox32, #checkbox32-filled, #playful, #plain, #unchecked-grey, #unchecked-red, #unchecked-blue, #unchecked-yellow {
     cursor: pointer;
 }
 
-#close32 {
+#close64 {
     height: 64px;
 }
 
