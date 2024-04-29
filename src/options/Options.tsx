@@ -3,13 +3,14 @@ import './Options.css'
 
 interface SetupProps {
   apiKey : string,
-  setApiKey : (arg0 : string) => void
+  setApiKey : (arg0 : string) => void,
+  model : string,
+  setModel : (arg0 : string) => void,
   playful: boolean,
   colorTheme: string
 }
 
-function Setup({apiKey, setApiKey, playful, colorTheme} : SetupProps) {
-  const [isModel35T, setIsModel35T] = React.useState<boolean>(true);
+function Setup({apiKey, setApiKey, model, setModel, playful, colorTheme} : SetupProps) {
   const fontStyle = {
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
     fontSize: playful ? '40px' : '31px',
@@ -30,32 +31,34 @@ function Setup({apiKey, setApiKey, playful, colorTheme} : SetupProps) {
       </form>
       <div className="model">
         <p className="model_header">Model:</p>
-        {isModel35T ? <img 
-                        className='model-icon'
-                        alt='GPT 3.5 Turbo'
-                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T-${colorTheme}.svg`}
-                      />
-                      : 
-                      <img 
-                        className='model-icon'
-                        alt='GPT 3.5 Turbo'
-                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T.svg`}
-                        onClick={() => setIsModel35T(!isModel35T)}
-                      />
-        }
-        {!isModel35T ? <img 
-                        className='model-icon'
-                        alt='GPT 4 Turbo'
-                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T-${colorTheme}.svg`}
-                      />
-                      : 
-                      <img 
-                        className='model-icon'
-                        alt='GPT 4 Turbo'
-                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T.svg`}
-                        onClick={() => setIsModel35T(!isModel35T)}
-                      />
-        }
+        {model === 'gpt-3.5-turbo' ? (
+          <img
+            className="model-icon"
+            alt="GPT 3.5 Turbo"
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T-${colorTheme}.svg`}
+          />
+        ) : (
+          <img
+            className="model-icon"
+            alt="GPT 3.5 Turbo"
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T.svg`}
+            onClick={() => setModel('gpt-3.5-turbo')}
+          />
+        )}
+        {model === 'gpt-4-turbo' ? (
+          <img
+            className="model-icon"
+            alt="GPT 4 Turbo"
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T-${colorTheme}.svg`}
+          />
+        ) : (
+          <img
+            className="model-icon"
+            alt="GPT 4 Turbo"
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T.svg`}
+            onClick={() => setModel('gpt-4-turbo')}
+          />
+        )}
       </div>
     </div>
   )
@@ -192,6 +195,7 @@ function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : Displ
 
 function Options() {
   const [apiKey, setApiKey] = useState<string>('');
+  const [model, setModel] = useState<string>('gpt-3.5-turbo');
   const [summary, setSummary] = useState<boolean>(false);
   const [keyTerms, setKeyTerms] = useState<boolean>(false);
   const [questions, setQuestions] = useState<boolean>(false);
@@ -210,6 +214,7 @@ function Options() {
     const settings = JSON.parse(localStorage.getItem("settings") || '""')
     if (typeof(settings) === "object") {
       setApiKey(settings.apiKey);
+      setModel(settings.model);
       setSummary(settings.summary);
       setKeyTerms(settings.keyTerms);
       setQuestions(settings.questions);
@@ -219,12 +224,13 @@ function Options() {
   }, [])
 
   const handleClick = () => {
-    console.log({apiKey, summary, keyTerms, questions, playful, colorTheme});
+    console.log({apiKey, model, summary, keyTerms, questions, playful, colorTheme});
     if (apiKey === '') {
       window.alert("NO API KEY!");
     } else {
       window.localStorage.setItem("settings", JSON.stringify({
           apiKey : apiKey,
+          model : model,
           summary: summary,
           keyTerms : keyTerms,
           questions : questions,
@@ -257,7 +263,7 @@ function Options() {
           />
         </div>
       </div>
-      <Setup apiKey={apiKey} setApiKey={setApiKey} playful={playful} colorTheme={colorTheme}/>
+      <Setup apiKey={apiKey} setApiKey={setApiKey} model={model} setModel={setModel} playful={playful} colorTheme={colorTheme}/>
       <p className="features_header" style={fontStyle2}>Features:</p>
       <div className="features">
         <Feature

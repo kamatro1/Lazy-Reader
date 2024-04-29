@@ -20,6 +20,7 @@ interface ContentProps {
 function Content({ summaryText } : ContentProps) {
   const { apiKey, summary, keyTerms, questions, playful, colorTheme } = useContext(SettingsContext);
   const [copy, setCopy] = useState<boolean>(false);
+  const [isLoadingSummary, setIsLoadingSummary] = useState(false); // New state for loading summary
 
   const headingTextStyle = {
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
@@ -84,7 +85,7 @@ function Content({ summaryText } : ContentProps) {
               />
             </div>
             <div id ='summary-text-box' className='feature-text-box' style={{ ...summaryTextBoxStyle, ...contentStyle }}>
-              {summaryText}
+              {isLoadingSummary ? <p>Loading summary...</p> : summaryText}
             </div>
           </div>
         </>

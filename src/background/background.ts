@@ -12,14 +12,14 @@ chrome.runtime.onInstalled.addListener(() => {
  * Sends a request to the OpenAI API to generate a response based on the provided parameters.
  *
  * @param {string} apiKey - The API key for authentication. Throws a detailed error if incorrect.
- * @param {string} model - The OpenAI model to use for generating the response. Allowed values: "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo" (default).
+ * @param {string} model - The OpenAI model to use for generating the response. Allowed values: "gpt-4-turbo" or "gpt-3.5-turbo" (default).
  * @param {string} responseType - The type of response to generate. Allowed values: "summarization" (default), "questions", "terms".
  * @param {string} content - The selected/page text to be concatenated to the end of the prompt.
  * @param {string} format - The format of the generated response. Allowed values: "bullet points" (default), "paragraph".
  *                          Only applicable when responseType is "summarization".
  * @param {string} readingLevel - The reading level of the generated response. Allowed values: "beginner", "intermediate" (default), "advanced".
  *                                Only applicable when responseType is "summarization".
- * @param {string} length - The desired length of the generated response. Allowed values: "concise", "regular" (default), "detailed".
+ * @param {string} length - The desired length of the generated response. Allowed values: "s", "m" (default), "l".
  *                          Only applicable when responseType is "summarization".
  * @param {function} sendResponse - The callback function to send the API response back to the caller.
  */
@@ -49,11 +49,11 @@ function getGPTResponse(apiKey: string, model: string, responseType: string, con
     }
 
     promptPrefix += "The summary should have a length of approximately";
-    if (length === "concise") {
+    if (length === "s") {
       promptPrefix += " 250 words.";
-    } else if (length === "regular") {
+    } else if (length === "m") {
       promptPrefix += " 500 words.";
-    } else if (length === "detailed") {
+    } else if (length === "l") {
       promptPrefix += " 1000 words. Use markdown headings to seperate different sections of the summary. Add a short 'tl;dr' section at the very end of the summary.";
     }
 
