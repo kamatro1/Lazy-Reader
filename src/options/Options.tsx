@@ -41,8 +41,6 @@ function Setup({apiKey, setApiKey, playful, colorTheme} : SetupProps) {
                         alt='GPT 3.5 Turbo'
                         src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T.svg`}
                         onClick={() => setIsModel35T(!isModel35T)}
-                        onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T-${colorTheme}.svg`)}
-                        onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T.svg`)}
                       />
         }
         {!isModel35T ? <img 
@@ -56,8 +54,6 @@ function Setup({apiKey, setApiKey, playful, colorTheme} : SetupProps) {
                         alt='GPT 4 Turbo'
                         src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T.svg`}
                         onClick={() => setIsModel35T(!isModel35T)}
-                        onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T-${colorTheme}.svg`)}
-                        onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T.svg`)}
                       />
         }
       </div>
