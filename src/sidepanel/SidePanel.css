@@ -1,177 +1,165 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
-.App {
-    color: purple;
-    text-align: center;
-  }
-  
-  .container {
-    width: 250px;
-    height: 80vh;
-    background-color: pink;
-  
-  }
+:root {
+  background-color: #ffffff;
+  overflow-y: hidden;
+}
 
-  :root {
-    background-color: #ffffff;
-    overflow-y: hidden;
-  }
+.header {
+  background-color: #ffffff;
+  height: 120px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  margin-bottom: 8px;
+  position: relative;
+  max-width: 100%;
+}
 
-  .header {
-    background-color: #ffffff;
-    height: 120px;
-    border-radius: 10px;
-    border: 2px solid #000000;
-    margin-bottom: 8px;
-    position: relative;
-    max-width: 100%;
-  }
+.header-top {
+  height: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: 2px solid #c1c1c1;
+  position: relative;
+  max-width: 100%;
+  display: flex;
+}
 
-  .header-top {
-    height: 60px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom: 2px solid #c1c1c1;
-    position: relative;
-    max-width: 100%;
-    display: flex;
-  }
+.header-top-logo {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 50%;
+}
 
-  .header-top-logo {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: 50%;
-  }
+.logo {
+  height: 60px;
+  width: 60px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
 
-  .logo {
-    height: 60px;
-    width: 60px;
-    margin-left: 5px;
-    margin-right: 10px;
-  }
+.header-top-buttons {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 50%;
+}
 
-  .header-top-buttons {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    width: 50%;
-  }
+.button {
+  height: 32px;
+  width: 32px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
-  .button {
-    height: 32px;
-    width: 32px;
-    margin-right: 5px;
-    margin-left: 5px;
-  }
+.header-bottom {
+  height: 60px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .header-bottom {
-    height: 60px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: relative;
-    max-width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.header-bottom-options {
+  width: 285px;
+  display: flex;
+  align-items: center;
+}
 
-  .header-bottom-options {
-    width: 285px;
-    display: flex;
-    align-items: center;
-  }
+.reading-level-container {
+  height: 32px;
+  min-width: 130px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .reading-level-container {
-    height: 32px;
-    min-width: 130px;
-    margin-right: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.length-container {
+  height: 32px;
+  min-width: 75px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .length-container {
-    height: 32px;
-    min-width: 75px;
-    margin-right: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    width: calc(100% - 4px);
-    z-index: 1;
-    border: 2px solid #000000;
-    border-radius: 0.25rem;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 12px;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 8px 16px;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #c1c1c1}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  width: calc(100% - 4px);
+  z-index: 1;
+  border: 2px solid #000000;
+  border-radius: 0.25rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+}
 
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
+.dropdown-content a {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+}
 
-  .dropdown-text {
-    font-size: 18px;
-  }
+.dropdown-content a:hover {background-color: #c1c1c1}
 
-  .content {
-    background-color: #ffffff;
-    height: 705px;
-    border-radius: 10px;
-    border: 2px solid #000000;
-    position: relative;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .section {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
-    width: calc(100% - 20px);
-  }
-  
-  .feature-header {
-    display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .feature-text-box {
-    background-color: #f1f1f1;
-    border-radius: 10px;
-    /* min-height: 100px; */
-  }
-  
-  .feature-text {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 14px;
-    font-style: normal; 
-  }
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-text {
+  font-size: 18px;
+}
+
+.content {
+  background-color: #ffffff;
+  height: 705px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  width: calc(100% - 20px);
+}
+
+.feature-header {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature-text-box {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  /* min-height: 100px; */
+}
+
+.feature-text {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal; 
+}

@@ -4,10 +4,12 @@ import './Options.css'
 interface SetupProps {
   apiKey : string,
   setApiKey : (arg0 : string) => void
-  playful: boolean
+  playful: boolean,
+  colorTheme: string
 }
 
-function Setup({apiKey, setApiKey, playful} : SetupProps) {
+function Setup({apiKey, setApiKey, playful, colorTheme} : SetupProps) {
+  const [isModel35T, setIsModel35T] = React.useState<boolean>(true);
   const fontStyle = {
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
     fontSize: playful ? '40px' : '31px',
@@ -26,6 +28,39 @@ function Setup({apiKey, setApiKey, playful} : SetupProps) {
             onChange={(e) => setApiKey(e.target.value)}
         />
       </form>
+      <div className="model">
+        <p className="model_header">Model:</p>
+        {isModel35T ? <img 
+                        className='model-icon'
+                        alt='GPT 3.5 Turbo'
+                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T-${colorTheme}.svg`}
+                      />
+                      : 
+                      <img 
+                        className='model-icon'
+                        alt='GPT 3.5 Turbo'
+                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T.svg`}
+                        onClick={() => setIsModel35T(!isModel35T)}
+                        onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T-${colorTheme}.svg`)}
+                        onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-3.5T.svg`)}
+                      />
+        }
+        {!isModel35T ? <img 
+                        className='model-icon'
+                        alt='GPT 4 Turbo'
+                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T-${colorTheme}.svg`}
+                      />
+                      : 
+                      <img 
+                        className='model-icon'
+                        alt='GPT 4 Turbo'
+                        src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T.svg`}
+                        onClick={() => setIsModel35T(!isModel35T)}
+                        onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T-${colorTheme}.svg`)}
+                        onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/model/model-4T.svg`)}
+                      />
+        }
+      </div>
     </div>
   )
 }
@@ -34,17 +69,18 @@ interface FeatureProps {
   feature : string, 
   checked : boolean, 
   setChecked : (arg0: boolean) => void,
-  playful: boolean
+  playful: boolean,
+  colorTheme: string
 }
 
-function Feature({ feature, checked, setChecked, playful } : FeatureProps ) {    
+function Feature({ feature, checked, setChecked, playful, colorTheme } : FeatureProps ) {    
   return (
     <div className="feature">
       {checked ?
         <img
           id='checkbox32-filled'
           className='logo'
-          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled.svg`}
+          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`}
           alt='Checked Box'
           onClick={() => setChecked(!checked)}
         />
@@ -52,7 +88,7 @@ function Feature({ feature, checked, setChecked, playful } : FeatureProps ) {
         <img
           id='checkbox32'
           className='logo'
-          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked.svg`}
+          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked-${colorTheme}.svg`}
           alt='Unchecked Box'
           onClick={() => setChecked(!checked)}
         />
@@ -82,9 +118,9 @@ function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : Displ
       </p>
       <div className="theme">
         <p className="theme_header">Theme:</p>
-        {playful ? <img id='playful-filled' src="../icons/plain-ui/playful-option/playful-option-filled.svg" alt="PlayFul Option Filled" className='logo playful-setting-icon'/> :
+        {playful ? <img id='playful-filled' src={`../icons/plain-ui/playful-option/playful-option-filled-${colorTheme}.svg`} alt="PlayFul Option Filled" className='logo playful-setting-icon'/> :
                    <img id='playful' src="../icons/plain-ui/playful-option/playful-option.svg" alt="PlayFul Option" className='logo playful-setting-icon' onClick={() => setPlayful(!playful)}/>}
-        {!playful ? <img id='plain-filled' src="../icons/plain-ui/plain-option/plain-option-filled.svg" alt="Plain Option Filled" className='logo playful-setting-icon'/> :
+        {!playful ? <img id='plain-filled' src={`../icons/plain-ui/plain-option/plain-option-filled-${colorTheme}.svg`} alt="Plain Option Filled" className='logo playful-setting-icon'/> :
                    <img id='plain' src="../icons/plain-ui/plain-option/plain-option.svg" alt="Plain Option" className='logo playful-setting-icon' onClick={() => setPlayful(!playful)}/>}
       </div>
       <div className="theme_colors">
@@ -205,7 +241,7 @@ function Options() {
 
   return (
     <div className={`container ${playful ? 'playful' : 'plain'}`}>
-      <div className="header">
+      <div className="options_header">
         <div className="left_header">
           <img
             id='sloth128'
@@ -225,7 +261,7 @@ function Options() {
           />
         </div>
       </div>
-      <Setup apiKey={apiKey} setApiKey={setApiKey} playful={playful}/>
+      <Setup apiKey={apiKey} setApiKey={setApiKey} playful={playful} colorTheme={colorTheme}/>
       <p className="features_header" style={fontStyle2}>Features:</p>
       <div className="features">
         <Feature
@@ -233,18 +269,21 @@ function Options() {
           checked={summary}
           setChecked={setSummary}
           playful={playful}
+          colorTheme={colorTheme}
         />
         <Feature
           feature={"Generate Key Terms"}
           checked={keyTerms}
           setChecked={setKeyTerms}
           playful={playful}
+          colorTheme={colorTheme}
         />
         <Feature
           feature={"Generate Reflection Questions"}
           checked={questions}
           setChecked={setQuestions}
           playful={playful}
+          colorTheme={colorTheme}
         />
       </div>
       <DisplayOptions

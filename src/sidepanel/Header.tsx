@@ -5,6 +5,7 @@ import { SettingsContext } from './SidePanel';
 
 interface SettingsContextValue {
   apiKey: string;
+  model: string
   summary: boolean;
   keyTerms: boolean;
   questions: boolean;
@@ -17,7 +18,7 @@ interface HeaderProps {
 }
 
 function Header({ setSummaryText }: HeaderProps) {
-  const { apiKey, summary, keyTerms, questions, playful, colorTheme } = useContext(SettingsContext);
+  const { apiKey, model, summary, keyTerms, questions, playful, colorTheme } = useContext(SettingsContext);
   const [bulletPoint, setBulletPoints] = React.useState<boolean>(true);
   const [readingLevel, setReadingLevel] = React.useState<string>('advanced');
   const [length, setLength] = React.useState<string>('regular');
@@ -75,7 +76,7 @@ function Header({ setSummaryText }: HeaderProps) {
     const content = 'Supreme Court showdowns. Closed-door negotiations. And millions of dollars in litigation. After months of legal and legislative skirmishes around the country, much of the redistricting drama of the 2024 election cycle is behind us. And it has ended pretty close to where it began: Just a handful of seats could determine which party controls the US House of Representatives, where Republicans now hold a threadbare majority.In North Carolina, newly empowered GOP state legislators took an aggressive approach with their map-drawing, crafting lines that are expected to allow their party to flip at least three seats now held by Democrats. But, in recently concluded redistricting in New York, Democrats, who had final say over the map, adopted a more modest position – essentially turning just one Republican-held seat a deeper shade of blue.In the South, Democrats are expected to gain two seats as a result of Voting Rights Act rulings out of Alabama and Louisiana. But a protracted battle over the congressional map in another Southern state, Georgia, has not changed the partisan balance of the state’s US House delegation heading into November.“It’s amazing that with all of the states where we’ve had things going on and with all the different lawsuits, we are really only talking about a small number of districts that are guaranteed to change hands as a result of this entire shuffle,” said Nick Seabrook, a political scientist at the University of North Florida and the author of the 2022 book “One Person, One Vote: A Surprising History of Gerrymandering in America.”'
     const body = {
       apiKey: apiKey,
-      model: 'gpt-3.5-turbo',
+      model: model,
       responseType: 'summarization',
       content: content,
       format: bulletPoint ? 'bullet points' : 'paragraph',

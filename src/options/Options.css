@@ -7,7 +7,7 @@
     padding: 25px 50px;
 }
 
-.header {
+.options_header {
     height: 20%;
     border-bottom: 4px solid #C1C1C1;
     display: flex;
@@ -78,7 +78,22 @@
 form {
     width: 100%;
     display: flex;
-    padding: 30px 0 30px 5px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.model {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.model_header {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    padding-right: 20px;
 }
 
 .features {
@@ -92,7 +107,7 @@ form {
     margin-bottom: 10px;
 }
 
-.feature_name,.theme_header, .theme_colors_header {
+.feature_name, .theme_colors_header {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
     font-size: 24px;
@@ -101,11 +116,21 @@ form {
     margin-left: 15px;
 }
 
+.theme_header {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0;
+    padding-top: 7px;
+    margin-left: 15px;
+    align-content: center;
+}
+
 .theme, .theme_colors {
     display: flex;
     margin-top: 20px;
 }
 
-.playful-setting-icon, .color-icon{
+.playful-setting-icon, .color-icon, .model-icon{
     padding-left: 15px;
 }

@@ -5,6 +5,7 @@ import Content from './Content';
 
 export const SettingsContext = createContext<{
   apiKey: string;
+  model: string;
   summary: boolean;
   keyTerms: boolean;
   questions: boolean;
@@ -12,6 +13,7 @@ export const SettingsContext = createContext<{
   colorTheme: string;
 }>({
   apiKey: '',
+  model: 'gpt-3.5-turbo',
   summary: false,
   keyTerms: false,
   questions: false,
@@ -38,6 +40,7 @@ function SidePanelContent() {
 function SidePanel() {
   const [settings, setSettings] = useState({
     apiKey: '',
+    model: 'gpt-3.5-turbo',
     summary: false,
     keyTerms: false,
     questions: false,
