@@ -38,13 +38,16 @@ function Content({ summaryText } : ContentProps) {
     case 'red':
       backgroundColor = '#FFE9E9';
       break;
+    case 'green':
+      backgroundColor = '#D6F4C8';
+      break;
     default:
       backgroundColor = '#F1F1F1';
   }
 
   const contentStyle = { backgroundColor };
 
-  const summaryHeight = summary && !keyTerms && !questions ? 74 : (summary && keyTerms && questions ? 30 : 55);
+  const summaryHeight = summary && !keyTerms && !questions ? 74 : (summary && keyTerms && questions ? 35 : 55);
   const keyTermsHeight = keyTerms && !summary ? 33 : (keyTerms ? 12 : 0);
   const questionsHeight = questions && !summary ? 33 : (questions ? 12 : 0);
 

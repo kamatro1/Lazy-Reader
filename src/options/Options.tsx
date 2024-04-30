@@ -188,6 +188,22 @@ function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : Displ
             onClick={() => setColorTheme('yellow')}
           />
         }
+        {colorTheme === 'green' ?
+          <img
+            id='checked-green'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-green.svg`}
+            alt='Checked green'
+            className='color-icon'
+          />
+          :
+          <img
+            id='unchecked-green'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-unchecked-green.svg`}
+            alt='Unchecked green'
+            className='color-icon'
+            onClick={() => setColorTheme('green')}
+          />
+        }
       </div>
     </div>
   )
