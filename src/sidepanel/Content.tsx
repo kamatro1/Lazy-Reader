@@ -13,14 +13,18 @@ interface SettingsContextValue {
 
 interface ContentProps {
   summaryText: string;
-  // keyTermsText: string;
-  // questionsText: string;
+  isLoadingSummary: boolean;
+  keyTermsText: string;
+  isLoadingKeyTerms: boolean;
+  questionsText: string;
+  isLoadingQuestions: boolean;
 }
 
-function Content({ summaryText } : ContentProps) {
+function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerms, questionsText, isLoadingQuestions } : ContentProps) {
   const { apiKey, summary, keyTerms, questions, playful, colorTheme } = useContext(SettingsContext);
-  const [copy, setCopy] = useState<boolean>(false);
-  const [isLoadingSummary, setIsLoadingSummary] = useState(false); // New state for loading summary
+  const [copySummary, setCopySummary] = useState<boolean>(false);
+  const [copyKeyTerms, setCopyKeyTerms] = useState<boolean>(false);
+  const [copyQuestions, setCopyQuestions] = useState<boolean>(false);
 
   const headingTextStyle = {
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
@@ -66,22 +70,22 @@ function Content({ summaryText } : ContentProps) {
                 id='copy32' 
                 className='button'
                 alt='copy' 
-                src={copy 
+                src={copySummary 
                   ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
                   : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
                 onClick={() => {
-                  setCopy(true);
+                  setCopySummary(true);
                   setTimeout(() => {
-                    setCopy(false);
+                    setCopySummary(false);
                   }, 3000);
                 }} 
                 onMouseOver={(e) => {
-                  if (!copy) {
+                  if (!copySummary) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
                   }
                 }} 
                 onMouseOut={(e) => {
-                  if (!copy) {
+                  if (!copySummary) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
                   }
                 }}
@@ -103,28 +107,30 @@ function Content({ summaryText } : ContentProps) {
                 id='copy32' 
                 className='button'
                 alt='copy' 
-                src={copy 
+                src={copyKeyTerms 
                   ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
                   : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
                 onClick={() => {
-                  setCopy(true);
+                  setCopyKeyTerms(true);
                   setTimeout(() => {
-                    setCopy(false);
+                    setCopyKeyTerms(false);
                   }, 3000);
                 }} 
                 onMouseOver={(e) => {
-                  if (!copy) {
+                  if (!copyKeyTerms) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
                   }
                 }} 
                 onMouseOut={(e) => {
-                  if (!copy) {
+                  if (!copyKeyTerms) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
                   }
                 }}
               />
             </div>
-            <div id='key-terms-text-box' className='feature-text-box' style={{ ...keyTermsTextBoxStyle, ...contentStyle }}></div>
+            <div id='key-terms-text-box' className='feature-text-box' style={{ ...keyTermsTextBoxStyle, ...contentStyle }}>
+              {isLoadingKeyTerms ? <p>Loading key terms...</p> : keyTermsText}
+            </div>
           </div>
         </>
       )}
@@ -138,28 +144,30 @@ function Content({ summaryText } : ContentProps) {
                 id='copy32' 
                 className='button'
                 alt='copy' 
-                src={copy 
+                src={copyQuestions 
                   ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
                   : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
                 onClick={() => {
-                  setCopy(true);
+                  setCopyQuestions(true);
                   setTimeout(() => {
-                    setCopy(false);
+                    setCopyQuestions(false);
                   }, 3000);
                 }} 
                 onMouseOver={(e) => {
-                  if (!copy) {
+                  if (!copyQuestions) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
                   }
                 }} 
                 onMouseOut={(e) => {
-                  if (!copy) {
+                  if (!copyQuestions) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
                   }
                 }}
               />
             </div>
-            <div id='questions-text-box' className='feature-text-box' style={{ ...questionsTextBoxStyle, ...contentStyle }}></div>
+            <div id='questions-text-box' className='feature-text-box' style={{ ...questionsTextBoxStyle, ...contentStyle }}>
+              {isLoadingQuestions ? <p>Loading questions...</p> : questionsText}
+            </div>
           </div>
         </>
       )}

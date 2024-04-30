@@ -82,6 +82,7 @@ function getGPTResponse(apiKey: string, model: string, responseType: string, con
     .then(res => {
       if (!res.ok) {
         return res.json().then(errorData => {
+          console.log(errorData);
           if (errorData.error && errorData.error.code === "invalid_api_key") {
             throw new Error("Invalid API key. Please provide a valid OpenAI API key.");
           } else {
