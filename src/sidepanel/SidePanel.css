@@ -155,7 +155,9 @@
 .feature-text-box {
   background-color: #f1f1f1;
   border-radius: 10px;
-  /* min-height: 100px; */
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .feature-text {

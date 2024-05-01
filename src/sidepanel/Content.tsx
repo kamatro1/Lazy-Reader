@@ -92,7 +92,7 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
               />
             </div>
             <div id ='summary-text-box' className='feature-text-box' style={{ ...summaryTextBoxStyle, ...contentStyle }}>
-              {isLoadingSummary ? <p>Loading summary...</p> : summaryText}
+              {isLoadingSummary ? <p className='feature-text'>Loading summary...</p> : <p className='feature-text'>{summaryText}</p>}
             </div>
           </div>
         </>
@@ -129,7 +129,7 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
               />
             </div>
             <div id='key-terms-text-box' className='feature-text-box' style={{ ...keyTermsTextBoxStyle, ...contentStyle }}>
-              {isLoadingKeyTerms ? <p>Loading key terms...</p> : keyTermsText}
+              {isLoadingKeyTerms ? <p className='feature-text'>Loading key terms...</p> : <p className='feature-text'>{keyTermsText}</p>}
             </div>
           </div>
         </>
@@ -166,7 +166,7 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
               />
             </div>
             <div id='questions-text-box' className='feature-text-box' style={{ ...questionsTextBoxStyle, ...contentStyle }}>
-              {isLoadingQuestions ? <p>Loading questions...</p> : questionsText}
+              {isLoadingQuestions ? <p className='feature-text'>Loading questions...</p> : <p className='feature-text'>{questionsText}</p>}
             </div>
           </div>
         </>
