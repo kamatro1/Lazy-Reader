@@ -116,13 +116,23 @@ function Options() {
 
   return (
     <div className="container">
-        <div className="header">
-            <div className="left_header">
+        <div className="intro">
+          <div className="intro_header_top">
+            <div className="left_intro_header">
               <img id='sloth128' className='logo' src='../icons/playful-ui/sloth/sloth128.svg' alt='Sloth Logo'></img>
-              <p className="setting_header">Settings</p>
+              <p className="intro_header">Welcome to LazyReader</p>
             </div>
             <div className="right_header">
               <img id='close32' className='logo' src='../icons/playful-ui/close/close32.svg' alt='Closed Icon' onClick={handleClick}></img>
+            </div>
+          </div>
+          <div className="user_instructions">
+            <p className="intro_text">Welcome to the LazyReader Extension! To use the LazyReader summarization features, please select the text you would like to summarize, then right click and select “Capture Snippet”. On the sidebar, select your desired bullet point format, level, and length before clicking on the checkmark button to generate your summary!</p>
+          </div>
+      </div>
+        <div className="header">
+            <div className="left_header">
+              <p className="setting_header">Settings</p>
             </div>
         </div>
         <Setup apiKey={apiKey} setApiKey={setApiKey}/>
