@@ -85,10 +85,14 @@
     flex-direction: column;
 }
 
-.setup_header, .features_header, .display_options_header {
+.setup_header, .features_header, .display_options_header, .settings_header {
     font-size: 40px;
     border-bottom: 4px solid #C1C1C1;
     margin: 0;
+}
+
+.settings_header {
+    padding-top: 2%;
 }
 
 .setup_header {
