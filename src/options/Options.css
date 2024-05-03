@@ -13,6 +13,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 2%;
+}
+
+.intro {
+    height: 30%;
+    align-items: center;
+}
+
+.intro_header_top {
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left_intro_header {
+    display: flex;
+    align-items: center;
+    width: 60%;
+}
+
+.intro_header {
+    font-size: 60px;
+    margin: 0;
+    margin-left: 20px;
+}
+
+.intro_text {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+    margin: 0;
+    padding-top: 7px;
+    margin-left: 15px;
+}
+
+.user_instructions {
+    height: 10%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-bottom: 4px solid #C1C1C1;
+    align-items: center;
 }
 
 #close64, #checkbox32, #checkbox32-filled, #playful, #plain, #unchecked-grey, #unchecked-red, #unchecked-blue, #unchecked-yellow {
@@ -37,7 +78,6 @@
 .setting_header {
     font-size: 53px;
     margin: 0;
-    margin-left: 20px;
 }
 
 .setup {
