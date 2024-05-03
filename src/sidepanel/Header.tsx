@@ -61,7 +61,6 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
     setIsFirstGen(false);
     handleGetResponse();
   };
-
   const handleGenerateHover = () => {
     if (isFirstGen) {
       setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked-filled-${colorTheme}.svg`);
@@ -230,8 +229,9 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
             onMouseOut={handleGenerateHoverOut}
           />
       </div>
+      {errorMessage && <ErrorPopup errorMessage={errorMessage} onClose={handleCloseErrorPopup} />}
     </div>
   );
 }
 
-export default Header
+export default Header;

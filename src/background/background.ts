@@ -132,28 +132,29 @@ if (responseType === "summarization") {
   })
     .then(res => {
       if (!res.ok) {
+        // Parsing the error JSON to get detailed error message from OpenAI
         return res.json().then(errorData => {
-          console.log(errorData);
-          if (errorData.error && errorData.error.code === "invalid_api_key") {
-            throw new Error("Invalid API key. Please provide a valid OpenAI API key.");
-          } else {
-            throw new Error("API request failed.");
+          // Building a detailed error message based on OpenAI's response
+          let errorMessage = errorData.error && errorData.error.message ? errorData.error.message : "Unknown error occurred.";
+          if (errorData.error && errorData.error.code) {
+            errorMessage += ` (Error Code: ${errorData.error.code})`;
           }
+          throw new Error(errorMessage); // Throwing an error to be caught in the catch block
         });
       }
       return res.json();
     })
     .then((res) => {
       var result = "No response";
-      if (res.choices) {
+      if (res.choices && res.choices.length > 0) {
         result = res.choices[0].message.content;
       }
       console.log("[Background] sending response: " + result);
       sendResponse({ result: result });
     })
     .catch(err => {
-      console.log("error: " + err);
-      sendResponse({ result: err.message });
+      console.error("API error: " + err.message);
+      sendResponse({ error: err.message }); // Sending the error message directly as received from the catch block
     });
 }
 
