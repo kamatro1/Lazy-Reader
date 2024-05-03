@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import './SidePanel.css';
 import DropdownMenu from './Dropdown';
 import { SettingsContext } from './SidePanel';
+import ErrorPopup from './ErrorPopup';
 
 interface SettingsContextValue {
   apiKey: string;
@@ -30,6 +31,7 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
   const [checkbox, setCheckbox] = useState<boolean>(false);
   const [isFirstGen, setIsFirstGen] = useState<boolean>(true);
   const [iconSrc, setIconSrc] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     setIconSrc(`../icons/${playful ? 'playful-ui' : 'plain-ui'}/checkbox/checkbox32-checked.svg`);
@@ -77,6 +79,10 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
     }
   };
 
+  const handleCloseErrorPopup = () => {
+    setErrorMessage('');
+  };
+
   const handleGetResponse = () => {
     const content = 'Supreme Court showdowns. Closed-door negotiations. And millions of dollars in litigation. After months of legal and legislative skirmishes around the country, much of the redistricting drama of the 2024 election cycle is behind us. And it has ended pretty close to where it began: Just a handful of seats could determine which party controls the US House of Representatives, where Republicans now hold a threadbare majority.In North Carolina, newly empowered GOP state legislators took an aggressive approach with their map-drawing, crafting lines that are expected to allow their party to flip at least three seats now held by Democrats. But, in recently concluded redistricting in New York, Democrats, who had final say over the map, adopted a more modest position – essentially turning just one Republican-held seat a deeper shade of blue.In the South, Democrats are expected to gain two seats as a result of Voting Rights Act rulings out of Alabama and Louisiana. But a protracted battle over the congressional map in another Southern state, Georgia, has not changed the partisan balance of the state’s US House delegation heading into November.“It’s amazing that with all of the states where we’ve had things going on and with all the different lawsuits, we are really only talking about a small number of districts that are guaranteed to change hands as a result of this entire shuffle,” said Nick Seabrook, a political scientist at the University of North Florida and the author of the 2022 book “One Person, One Vote: A Surprising History of Gerrymandering in America.”'
 
@@ -92,11 +98,16 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
         length: length
       }
       console.log(body);
-  
-      chrome.runtime.sendMessage({ type: "getResponse", body }).then((response) => {
-        console.log("[Content] response from ChatGPT API: " + response.result);
-        setSummaryText(response.result);
-        setIsLoadingSummary(false);
+
+      chrome.runtime.sendMessage({ type: 'getResponse', body }).then((response) => {
+        if (response.error) {
+          setErrorMessage(response.error);
+        } else {
+          console.log('[Content] response from ChatGPT API: ' + response.result);
+          setSummaryText(response.result);
+          setIsLoadingSummary(false);
+
+        }
       });
       console.log({ apiKey: apiKey, summary: summary, questions: questions, keyTerms: keyTerms, playful: playful, colorTheme: colorTheme, readingLevel: readingLevel, length: length })
     }
@@ -113,7 +124,7 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
         length: length
       }
       console.log(body);
-  
+
       chrome.runtime.sendMessage({ type: "getResponse", body }).then((response) => {
         console.log("[Content] response from ChatGPT API: " + response.result);
         setKeyTermsText(response.result);
@@ -133,7 +144,7 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
         length: length
       }
       console.log(body);
-  
+
       chrome.runtime.sendMessage({ type: "getResponse", body }).then((response) => {
         console.log("[Content] response from ChatGPT API: " + response.result);
         setQuestionsText(response.result);
@@ -147,66 +158,66 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
     fontSize: playful ? '31px' : '24px', // adjust the font size for playful
   };
-  
+
   return (
     <div id='header' className='header'>
       <div id='header-top' className='header-top'>
         <div id='header-top-logo' className='header-top-logo'>
-          <img 
+          <img
             id='sloth60'
             className='logo'
-            alt='logo' 
+            alt='logo'
             src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/sloth/sloth60.svg`}>
           </img>
           <h1 id='title' style={headingTextStyle}>LazyReader</h1>
         </div>
         <div id='header-top-buttons' className='header-top-buttons'>
-        <img
-          id='settings32'
-          className='button'
-          alt='settings'
-          src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32.svg`}
-          onClick={handleClickClose}
-          onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32-filled-${colorTheme}.svg`)}
-          onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32.svg`)}
-        />
+          <img
+            id='settings32'
+            className='button'
+            alt='settings'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32.svg`}
+            onClick={handleClickClose}
+            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32-filled-${colorTheme}.svg`)}
+            onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/settings/settings32.svg`)}
+          />
         </div>
       </div>
       <div id='header-bottom' className='header-bottom'>
-      <div id='header-bottom-options' className='header-bottom-options'>
-          {bulletPoint ? <img 
-                            id='bullet'
-                            className='button'
-                            alt='bullet'
-                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled-${colorTheme}.svg`}>
-                          </img> : 
-                          <img 
-                            id='bullet'
-                            className='button'
-                            alt='bullet'
-                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32.svg`}
-                            onClick={() => setBulletPoints(!bulletPoint)}
-                            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled-${colorTheme}.svg`)}
-                            onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32.svg`)}>
-                          </img>}
-          {!bulletPoint ? <img 
-                            id='paragraph'
-                            className='button'
-                            alt='paragraph'
-                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled-${colorTheme}.svg`}>
-                          </img> : 
-                          <img 
-                            id='paragraph'
-                            className='button'
-                            alt='paragraph'
-                            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32.svg`}
-                            onClick={() => setBulletPoints(!bulletPoint)}
-                            onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled-${colorTheme}.svg`)}
-                            onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32.svg`)}>
-                          </img>}
+        <div id='header-bottom-options' className='header-bottom-options'>
+          {bulletPoint ? <img
+            id='bullet'
+            className='button'
+            alt='bullet'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled-${colorTheme}.svg`}>
+          </img> :
+            <img
+              id='bullet'
+              className='button'
+              alt='bullet'
+              src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32.svg`}
+              onClick={() => setBulletPoints(!bulletPoint)}
+              onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32-filled-${colorTheme}.svg`)}
+              onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/bullet/bullet32.svg`)}>
+            </img>}
+          {!bulletPoint ? <img
+            id='paragraph'
+            className='button'
+            alt='paragraph'
+            src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled-${colorTheme}.svg`}>
+          </img> :
+            <img
+              id='paragraph'
+              className='button'
+              alt='paragraph'
+              src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32.svg`}
+              onClick={() => setBulletPoints(!bulletPoint)}
+              onMouseOver={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32-filled-${colorTheme}.svg`)}
+              onMouseOut={e => (e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/paragraph/paragraph32.svg`)}>
+            </img>}
           <div id='reading-level-container' className='reading-level-container'>
             <h1 id='reading-level-text' className='dropdown-text'>Lvl:</h1>
-            <DropdownMenu 
+            <DropdownMenu
               optionType='readingLevel'
               setValue={setReadingLevel}
             />
@@ -216,18 +227,18 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
             <DropdownMenu
               optionType='length'
               setValue={setLength}
-            />            
+            />
           </div>
         </div>
         <img
-            id='icon'
-            className='button'
-            alt={isFirstGen ? 'checkbox' : 'refresh'}
-            src={iconSrc}
-            onClick={handleGenerateClick}
-            onMouseOver={handleGenerateHover}
-            onMouseOut={handleGenerateHoverOut}
-          />
+          id='icon'
+          className='button'
+          alt={isFirstGen ? 'checkbox' : 'refresh'}
+          src={iconSrc}
+          onClick={handleGenerateClick}
+          onMouseOver={handleGenerateHover}
+          onMouseOut={handleGenerateHoverOut}
+        />
       </div>
       {errorMessage && <ErrorPopup errorMessage={errorMessage} onClose={handleCloseErrorPopup} />}
     </div>
