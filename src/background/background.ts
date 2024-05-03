@@ -12,19 +12,18 @@ chrome.runtime.onInstalled.addListener(() => {
  * Sends a request to the OpenAI API to generate a response based on the provided parameters.
  *
  * @param {string} apiKey - The API key for authentication. Throws a detailed error if incorrect.
- * @param {string} model - The OpenAI model to use for generating the response. Allowed values: "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo" (default).
+ * @param {string} model - The OpenAI model to use for generating the response. Allowed values: "gpt-4-turbo" or "gpt-3.5-turbo" (default).
  * @param {string} responseType - The type of response to generate. Allowed values: "summarization" (default), "questions", "terms".
  * @param {string} content - The selected/page text to be concatenated to the end of the prompt.
  * @param {string} format - The format of the generated response. Allowed values: "bullet points" (default), "paragraph".
  *                          Only applicable when responseType is "summarization".
  * @param {string} readingLevel - The reading level of the generated response. Allowed values: "beginner", "intermediate" (default), "advanced".
  *                                Only applicable when responseType is "summarization".
- * @param {string} length - The desired length of the generated response. Allowed values: "concise", "regular" (default), "detailed".
+ * @param {string} length - The desired length of the generated response. Allowed values: "s", "m" (default), "l".
  *                          Only applicable when responseType is "summarization".
  * @param {function} sendResponse - The callback function to send the API response back to the caller.
  */
 function getGPTResponse(apiKey: string, model: string, responseType: string, content: string, format: string, readingLevel: string, length: string, sendResponse: any) {
-  
 let promptPrefix = "";
 
 if (responseType === "summarization") {
@@ -133,27 +132,29 @@ if (responseType === "summarization") {
   })
     .then(res => {
       if (!res.ok) {
+        // Parsing the error JSON to get detailed error message from OpenAI
         return res.json().then(errorData => {
-          if (errorData.error && errorData.error.code === "invalid_api_key") {
-            throw new Error("Invalid API key. Please provide a valid OpenAI API key.");
-          } else {
-            throw new Error("API request failed.");
+          // Building a detailed error message based on OpenAI's response
+          let errorMessage = errorData.error && errorData.error.message ? errorData.error.message : "Unknown error occurred.";
+          if (errorData.error && errorData.error.code) {
+            errorMessage += ` (Error Code: ${errorData.error.code})`;
           }
+          throw new Error(errorMessage); // Throwing an error to be caught in the catch block
         });
       }
       return res.json();
     })
     .then((res) => {
       var result = "No response";
-      if (res.choices) {
+      if (res.choices && res.choices.length > 0) {
         result = res.choices[0].message.content;
       }
       console.log("[Background] sending response: " + result);
       sendResponse({ result: result });
     })
     .catch(err => {
-      console.log("error: " + err);
-      sendResponse({ result: err.message });
+      console.error("API error: " + err.message);
+      sendResponse({ error: err.message }); // Sending the error message directly as received from the catch block
     });
 }
 
@@ -210,7 +211,6 @@ chrome.runtime.onInstalled.addListener(() => {
     }
   });
 });
-
 
 export { };
 
