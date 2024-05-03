@@ -20,7 +20,7 @@
       }
     },
     "permissions": [
-      "sidePanel", "activeTab"
+      "sidePanel", "activeTab","contextMenus","storage"
     ],
     "side_panel": {
       "default_path": "js/sidepanel.html"
