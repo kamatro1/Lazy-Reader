@@ -8,11 +8,13 @@ LazyReader is a Chrome extension that allows you to read and digest information 
 
 Getting Started
 To use LazyReader, follow these steps:
-1. Install the LazyReader Chrome extension from the Chrome Web Store.
-2. Navigate to any webpage containing textual content that you want to summarize or analyze.
-3. Click on the LazyReader extension icon in the Chrome toolbar to activate the sidebar.
-4. Use the sidebar UI components to interact with LazyReader's features, including text summarization, key terms, and question generation.
-5. Customize settings as desired and enjoy a more efficient browsing experience.
+1. To set up the environment, you will need to pull the repo and in the root folder, enter npm install  in the command line. 
+2. Go to chrome://extensions/, then click "Load unpacked" and select the dist folder.
+3. Navigate to any webpage containing textual content that you want to summarize or analyze.
+4. Click on the LazyReader extension icon in the Chrome toolbar to activate the sidebar.
+5. To use the LazyReader summarization features, please select the text you would like to summarize, then right click and select “Capture Snippet”. On the sidebar, select your desired bullet point format, level, and length before clicking on the checkmark button to generate your summary! 
+6. Use the sidebar UI components to interact with LazyReader's features, including text summarization, key terms, and question generation.
+Customize settings as desired and enjoy a more efficient browsing experience.
 
 Features and Functionalities
 - Text Summarization: Summarize the content of any webpage with a click.
