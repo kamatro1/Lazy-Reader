@@ -16,11 +16,11 @@ A "promo video" demonstrating the extension's features can be found [here](REPLA
 ## Screenshots
 
 The first screenshot showcases the **Settings Page** where the user enters their API key, chooses the response type(s), and customizes their UI:
-INSERT SCREENSHOT
-The second screenshot showcases the **Side Panel** where the user customizes the response (bullet point or paragraph format, length, complexity), and where the response is presented:
-INSERT SCREENSHOT
-The third screenshot showcases the **Context Menu** that appears when the user right-clicks on the highlighted text they wish to use for the response:
-INSERT SCREENSHOT
+![](./settings-screenshot.png)
+The second screenshot showcases the **Context Menu** that appears when the user right-clicks on the highlighted text they wish to use for the response
+![:](./contextMenu-screenshot.png)
+The third screenshot showcases the **Side Panel** where the user customizes the response (bullet point or paragraph format, length, complexity), and where the response is presented:
+![](./sidePanel-screenshot.png)
 
 ## Installation from Source
 
