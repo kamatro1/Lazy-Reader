@@ -11,7 +11,7 @@ A "landing page" showcasing the extension can be found [here](https://anniewangr
 - 💻 Customizable UI (both style and color)
 - 🖊️ Flexible Responses (length, format, complexity)
 
-A "promo video" demonstrating the extension's features can be found [here](REPLACE WHAT'S INSIDE PARENTHESES WITH LINK TO VIDEO).
+A "promo video" demonstrating the extension's features can be found [here](https://drive.google.com/file/d/1dkxfeP8jYa2EFK7XPKQEM3jdSSLHacp1/view?usp=sharing).
 
 ## Screenshots
 
