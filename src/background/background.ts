@@ -24,96 +24,97 @@ chrome.runtime.onInstalled.addListener(() => {
  * @param {function} sendResponse - The callback function to send the API response back to the caller.
  */
 function getGPTResponse(apiKey: string, model: string, responseType: string, content: string, format: string, readingLevel: string, length: string, sendResponse: any) {
-let promptPrefix = "";
+  let promptPrefix = "";
 
-if (responseType === "summarization") {
-  promptPrefix = "Task: Summarize the text provided after the triple backticks (```). Follow these guidelines:"
-    + "\n- Identify and extract the main ideas, key points, and essential information from the text."
-    + "\n- Synthesize the content into a concise and coherent summary, maintaining the original meaning and context."
-    + "\n- Use clear, concise, and easy-to-understand language, avoiding jargon or complex terminology."
-    + "\n- Organize the summary logically, ensuring a smooth flow of information and coherence between points."
-    + "\n- Retain the objectivity of the original text, without introducing personal opinions or biases."
-    + "\n\nSummary Format:"
-    + "\n- Present the summary";
-  if (format === "bullet points") {
-    promptPrefix += " as a well-structured list of bullet points."
-      + "\n- Each bullet point should represent a key idea or topic from the text."
-      + "\n- Use concise and informative phrases or sentences for each bullet point."
-      + "\n- Maintain a parallel structure and consistent level of detail across all bullet points.";
-  } else if (format === "paragraph") {
-    promptPrefix += " in well-organized paragraphs."
-      + "\n- Begin with a topic sentence that introduces the main idea of each paragraph."
-      + "\n- Follow the topic sentence with supporting details, examples, or explanations."
-      + "\n- Use transitional words or phrases to ensure smooth flow and logical connection between paragraphs."
-      + "\n- Conclude the summary with a paragraph that ties together the main points and provides a final overview.";
-  }
-  promptPrefix += "\n\nReading Level: Tailor the summary to a";
-  if (readingLevel === "beginner") {
-    promptPrefix += " 5th-grade reading level."
-      + "\n- Use simple vocabulary and short, straightforward sentences."
-      + "\n- Explain any complex concepts or terms in a way that is easily understandable for young readers."
-      + "\n- Focus on the most essential information and avoid unnecessary details or abstractions.";
-  } else if (readingLevel === "intermediate") {
-    promptPrefix += " high school reading level."
-      + "\n- Use clear, accessible language that is appropriate for a general audience."
-      + "\n- Provide sufficient context and explanations to ensure comprehension of the main ideas."
-      + "\n- Strike a balance between simplicity and depth, considering the reader's expected level of knowledge.";
-  } else if (readingLevel === "advanced") {
-    promptPrefix += " university graduate level."
-      + "\n- Use precise, academic language and sophisticated vocabulary appropriate for a well-educated audience."
-      + "\n- Engage with complex ideas, theories, or arguments presented in the text."
-      + "\n- Provide nuanced explanations and insights, demonstrating a deep understanding of the subject matter.";
-  }
-  promptPrefix += "\n\nSummary Length:";
-  if (length === "concise") {
-    promptPrefix += " Create a concise summary that captures the essence of the text."
-      + "\n- Focus on the most critical points and main takeaways."
-      + "\n- Omit minor details, examples, or peripheral information."
-      + "\n- Aim for a word count of approximately 100-150 words.";
-  } else if (length === "regular") {
-    promptPrefix += " Develop a balanced and informative summary of the text."
-      + "\n- Include the main ideas, key supporting points, and relevant details."
-      + "\n- Provide sufficient context and explanations to ensure a comprehensive understanding."
-      + "\n- Aim for a word count of approximately 250-300 words.";
-  } else if (length === "detailed") {
-    promptPrefix += " Craft a detailed and thorough summary that covers all significant aspects of the text."
-      + "\n- Discuss each main idea in depth, providing extensive supporting details and examples."
-      + "\n- Explore the nuances, implications, and connections between different concepts or arguments."
-      + "\n- Use markdown headings to organize the summary into logical sections or themes."
-      + "\n- Include a 'TL;DR' (Too Long; Didn't Read) section at the end, summarizing the key points in 1-2 concise paragraphs."
-      + "\n- Aim for a word count of approximately 500-700 words.";
-  }
-  promptPrefix += "\n\nText to summarize: ```\n";
+  if (responseType === "summarization") {
+    promptPrefix = "Task: Summarize the text provided after the triple backticks (```). Follow these guidelines:"
+      + "\n- Identify and extract the main ideas, key points, and essential information from the text."
+      + "\n- Synthesize the content into a concise and coherent summary, maintaining the original meaning and context."
+      + "\n- Use clear, concise, and easy-to-understand language, avoiding jargon or complex terminology."
+      + "\n- Organize the summary logically, ensuring a smooth flow of information and coherence between points."
+      + "\n- Retain the objectivity of the original text, without introducing personal opinions or biases."
+      + "\n\nSummary Format:"
+      + "\n- Present the summary";
+    if (format === "bullet points") {
+      promptPrefix += " as a well-structured list of bullet points."
+        + "\n- Each bullet point should represent a key idea or topic from the text."
+        + "\n- Use concise and informative phrases or sentences for each bullet point."
+        + "\n- Maintain a parallel structure and consistent level of detail across all bullet points.";
+    } else if (format === "paragraph") {
+      promptPrefix += " in well-organized paragraphs."
+        + "\n- Begin with a topic sentence that introduces the main idea of each paragraph."
+        + "\n- Follow the topic sentence with supporting details, examples, or explanations."
+        + "\n- Use transitional words or phrases to ensure smooth flow and logical connection between paragraphs."
+        + "\n- Conclude the summary with a paragraph that ties together the main points and provides a final overview.";
+    }
+    promptPrefix += "\n\nReading Level: Tailor the summary to a";
+    if (readingLevel === "beginner") {
+      promptPrefix += " 5th-grade reading level."
+        + "\n- Use simple vocabulary and short, straightforward sentences."
+        + "\n- Explain any complex concepts or terms in a way that is easily understandable for young readers."
+        + "\n- Focus on the most essential information and avoid unnecessary details or abstractions.";
+    } else if (readingLevel === "intermediate") {
+      promptPrefix += " high school reading level."
+        + "\n- Use clear, accessible language that is appropriate for a general audience."
+        + "\n- Provide sufficient context and explanations to ensure comprehension of the main ideas."
+        + "\n- Strike a balance between simplicity and depth, considering the reader's expected level of knowledge.";
+    } else if (readingLevel === "advanced") {
+      promptPrefix += " university graduate level."
+        + "\n- Use precise, academic language and sophisticated vocabulary appropriate for a well-educated audience."
+        + "\n- Engage with complex ideas, theories, or arguments presented in the text."
+        + "\n- Provide nuanced explanations and insights, demonstrating a deep understanding of the subject matter.";
+    }
+    promptPrefix += "\n\nSummary Length:";
+    if (length === "concise") {
+      promptPrefix += " Create a concise summary that captures the essence of the text."
+        + "\n- Focus on the most critical points and main takeaways."
+        + "\n- Omit minor details, examples, or peripheral information."
+        + "\n- Aim for a word count of approximately 100-150 words.";
+    } else if (length === "regular") {
+      promptPrefix += " Develop a balanced and informative summary of the text."
+        + "\n- Include the main ideas, key supporting points, and relevant details."
+        + "\n- Provide sufficient context and explanations to ensure a comprehensive understanding."
+        + "\n- Aim for a word count of approximately 250-300 words.";
+    } else if (length === "detailed") {
+      promptPrefix += " Craft a detailed and thorough summary that covers all significant aspects of the text."
+        + "\n- Discuss each main idea in depth, providing extensive supporting details and examples."
+        + "\n- Explore the nuances, implications, and connections between different concepts or arguments."
+        + "\n- Use markdown headings to organize the summary into logical sections or themes."
+        + "\n- Include a 'TL;DR' (Too Long; Didn't Read) section at the end, summarizing the key points in 1-2 concise paragraphs."
+        + "\n- Aim for a word count of approximately 500-700 words.";
+    }
+    promptPrefix += "\n\nText to summarize: ```\n";
 
-} else if (responseType === "questions") {
-  promptPrefix = "Task: Generate 3 thought-provoking reflection questions based on the provided text."
-    + "\n\nGuidelines:"
-    + "\n- Craft open-ended questions that stimulate critical thinking, analysis, and personal reflection."
-    + "\n- Encourage readers to explore the deeper meanings, implications, or applications of the text."
-    + "\n- Avoid questions that can be answered superficially or by simply restating information from the text."
-    + "\n- Use clear, concise, and engaging language that invites thoughtful responses."
-    + "\n\nQuestion Types:"
-    + "\n- Conceptual Questions: Focus on the key concepts, theories, or ideas presented in the text."
-    + "\n  - Example: How does the author's theory of [concept] challenge conventional understanding of [related topic]?"
-    + "\n- Analytical Questions: Encourage readers to examine the text critically and draw their own conclusions."
-    + "\n  - Example: What are the strengths and limitations of the evidence presented in support of [argument]?"
-    + "\n- Reflective Questions: Prompt readers to relate the text to their own experiences, beliefs, or values."
-    + "\n  - Example: How has your perspective on [issue] evolved after reading this text, and why?"
-    + "\n\nText: ";
+  } else if (responseType === "questions") {
+    promptPrefix = "Task: Generate 3 thought-provoking reflection questions based on the provided text."
+      + "\n\nGuidelines:"
+      + "\n- Craft open-ended questions that stimulate critical thinking, analysis, and personal reflection."
+      + "\n- Encourage readers to explore the deeper meanings, implications, or applications of the text."
+      + "\n- Avoid questions that can be answered superficially or by simply restating information from the text."
+      + "\n- Use clear, concise, and engaging language that invites thoughtful responses."
+      + "\n- Start each question with a backtick '-'"
+      + "\n\nQuestion Types:"
+      + "\n- Conceptual Questions: Focus on the key concepts, theories, or ideas presented in the text."
+      + "\n  - Example: How does the author's theory of [concept] challenge conventional understanding of [related topic]?"
+      + "\n- Analytical Questions: Encourage readers to examine the text critically and draw their own conclusions."
+      + "\n  - Example: What are the strengths and limitations of the evidence presented in support of [argument]?"
+      + "\n- Reflective Questions: Prompt readers to relate the text to their own experiences, beliefs, or values."
+      + "\n  - Example: How has your perspective on [issue] evolved after reading this text, and why?"
+      + "\n\nText: ";
 
-} else if (responseType === "terms") {
-  promptPrefix = "Task: Identify and define 5 key terms or concepts from the given text."
-    + "\n\nInstructions:"
-    + "\n- Select terms that are central to understanding the main ideas, arguments, or themes of the text."
-    + "\n- Choose terms that are specific, significant, and likely to be unfamiliar to readers."
-    + "\n- Provide clear, accurate, and concise definitions that capture the essence of each term."
-    + "\n- Use simple language and relatable examples to make the definitions accessible to a general audience."
-    + "\n- Format each term and its definition as follows:"
-    + "\n  - Term: [Term]"
-    + "\n    Definition: [Definition]"
-    + "\n- Ensure that the definitions are self-contained and can be understood independently of the text."
-    + "\n\nText: ";
-}
+  } else if (responseType === "terms") {
+    promptPrefix = "Task: Identify and define 5 key terms or concepts from the given text."
+      + "\n\nInstructions:"
+      + "\n- Select terms that are central to understanding the main ideas, arguments, or themes of the text."
+      + "\n- Choose terms that are specific, significant, and likely to be unfamiliar to readers."
+      + "\n- Provide clear, accurate, and concise definitions that capture the essence of each term."
+      + "\n- Use simple language and relatable examples to make the definitions accessible to a general audience."
+      + "\n- Format each term and its definition as follows: Start with a backtick '-'"
+      + "\n   [Term]"
+      + "\n    : [Definition]"
+      + "\n- Ensure that the definitions are self-contained and can be understood independently of the text."
+      + "\n\nText: ";
+  }
 
   let data = {
     "model": model,
@@ -170,12 +171,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     const length = body.length;
     // Retrieve the selected text from Chrome's local storage
     //chrome.storage.local.get('selectedText', function(result) {
-      chrome.storage.local.get('selectedText', function(result) {
-        if (chrome.runtime.lastError) {
-          console.error(chrome.runtime.lastError.message);
-          sendResponse({ result: "Error retrieving selected text." });
-          return;
-        }
+    chrome.storage.local.get('selectedText', function (result) {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError.message);
+        sendResponse({ result: "Error retrieving selected text." });
+        return;
+      }
       const content = result.selectedText;
       console.log("[Background] API_KEY: " + apiKey);
       console.log("[Background] Model: " + model);
@@ -201,8 +202,8 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ['selection'], // Show the context menu item only when text is selected
   });
 
-// Listen for the context menu click event
-  chrome.contextMenus.onClicked.addListener(function(info, tab) {
+  // Listen for the context menu click event
+  chrome.contextMenus.onClicked.addListener(function (info, tab) {
     console.log("[Background] Listening for onClicked");
     if (info.menuItemId === "captureSnippet") {
       console.log("[Background] Captured Snippet");

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import './Options.css'
 
 interface SetupProps {
-  apiKey : string,
-  setApiKey : (arg0 : string) => void,
-  model : string,
-  setModel : (arg0 : string) => void,
+  apiKey: string,
+  setApiKey: (arg0: string) => void,
+  model: string,
+  setModel: (arg0: string) => void,
   playful: boolean,
   colorTheme: string
 }
 
-function Setup({apiKey, setApiKey, model, setModel, playful, colorTheme} : SetupProps) {
+function Setup({ apiKey, setApiKey, model, setModel, playful, colorTheme }: SetupProps) {
   const fontStyle = {
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
     fontSize: playful ? '40px' : '31px',
@@ -22,11 +22,11 @@ function Setup({apiKey, setApiKey, model, setModel, playful, colorTheme} : Setup
       <form>
         <label htmlFor="apikey" className='apikey_label'>Enter User API Key: </label>
         <input
-            id="apikey"
-            type="text"
-            className='apikey_input'
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
+          id="apikey"
+          type="text"
+          className='apikey_input'
+          value={apiKey}
+          onChange={(e) => setApiKey(e.target.value)}
         />
       </form>
       <div className="model">
@@ -65,14 +65,14 @@ function Setup({apiKey, setApiKey, model, setModel, playful, colorTheme} : Setup
 }
 
 interface FeatureProps {
-  feature : string, 
-  checked : boolean, 
-  setChecked : (arg0: boolean) => void,
+  feature: string,
+  checked: boolean,
+  setChecked: (arg0: boolean) => void,
   playful: boolean,
   colorTheme: string
 }
 
-function Feature({ feature, checked, setChecked, playful, colorTheme } : FeatureProps ) {    
+function Feature({ feature, checked, setChecked, playful, colorTheme }: FeatureProps) {
   return (
     <div className="feature">
       {checked ?
@@ -98,18 +98,18 @@ function Feature({ feature, checked, setChecked, playful, colorTheme } : Feature
 }
 
 interface DisplayOptionsProps {
-  playful : boolean,
-  setPlayful : (arg0: boolean) => void,
-  colorTheme : string,
-  setColorTheme : (arg0: string) => void
+  playful: boolean,
+  setPlayful: (arg0: boolean) => void,
+  colorTheme: string,
+  setColorTheme: (arg0: string) => void
 }
 
-function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : DisplayOptionsProps) {
+function DisplayOptions({ playful, setPlayful, colorTheme, setColorTheme }: DisplayOptionsProps) {
   const fontStyle = {
     fontFamily: playful ? "'Gamja Flower', sans-serif" : "'Josefin Sans', sans-serif",
     fontSize: playful ? '40px' : '31px',
   };
-  
+
   return (
     <div className="display_options">
       <p className="display_options_header" style={fontStyle}>
@@ -117,10 +117,10 @@ function DisplayOptions({playful, setPlayful, colorTheme, setColorTheme} : Displ
       </p>
       <div className="theme">
         <p className="theme_header">Theme:</p>
-        {playful ? <img id='playful-filled' src={`../icons/plain-ui/playful-option/playful-option-filled-${colorTheme}.svg`} alt="PlayFul Option Filled" className='logo playful-setting-icon'/> :
-                   <img id='playful' src="../icons/plain-ui/playful-option/playful-option.svg" alt="PlayFul Option" className='logo playful-setting-icon' onClick={() => setPlayful(!playful)}/>}
-        {!playful ? <img id='plain-filled' src={`../icons/plain-ui/plain-option/plain-option-filled-${colorTheme}.svg`} alt="Plain Option Filled" className='logo playful-setting-icon'/> :
-                   <img id='plain' src="../icons/plain-ui/plain-option/plain-option.svg" alt="Plain Option" className='logo playful-setting-icon' onClick={() => setPlayful(!playful)}/>}
+        {playful ? <img id='playful-filled' src={`../icons/plain-ui/playful-option/playful-option-filled-${colorTheme}.svg`} alt="PlayFul Option Filled" className='logo playful-setting-icon' /> :
+          <img id='playful' src="../icons/plain-ui/playful-option/playful-option.svg" alt="PlayFul Option" className='logo playful-setting-icon' onClick={() => setPlayful(!playful)} />}
+        {!playful ? <img id='plain-filled' src={`../icons/plain-ui/plain-option/plain-option-filled-${colorTheme}.svg`} alt="Plain Option Filled" className='logo playful-setting-icon' /> :
+          <img id='plain' src="../icons/plain-ui/plain-option/plain-option.svg" alt="Plain Option" className='logo playful-setting-icon' onClick={() => setPlayful(!playful)} />}
       </div>
       <div className="theme_colors">
         <p className="theme_colors_header">Theme Colors:</p>
@@ -228,7 +228,7 @@ function Options() {
 
   useEffect(() => {
     const settings = JSON.parse(localStorage.getItem("settings") || '""')
-    if (typeof(settings) === "object") {
+    if (typeof (settings) === "object") {
       setApiKey(settings.apiKey);
       setModel(settings.model);
       setSummary(settings.summary);
@@ -240,44 +240,44 @@ function Options() {
   }, [])
 
   const handleClick = () => {
-    console.log({apiKey, model, summary, keyTerms, questions, playful, colorTheme});
+    console.log({ apiKey, model, summary, keyTerms, questions, playful, colorTheme });
     if (apiKey === '') {
       window.alert("NO API KEY!");
     } else {
       window.localStorage.setItem("settings", JSON.stringify({
-          apiKey : apiKey,
-          model : model,
-          summary: summary,
-          keyTerms : keyTerms,
-          questions : questions,
-          playful : playful,
-          colorTheme : colorTheme
+        apiKey: apiKey,
+        model: model,
+        summary: summary,
+        keyTerms: keyTerms,
+        questions: questions,
+        playful: playful,
+        colorTheme: colorTheme
       }));
       window.close();
     }
   };
 
   return (
-      <div className={`container ${playful ? 'playful' : 'plain'}`}>
-          <div className="intro">
-            <div className="intro_header_top">
-              <div className="left_intro_header">
-                <img id='sloth128' className='logo' src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/sloth/sloth128.svg`} alt='Sloth Logo'></img>
-                <p className="intro_header">Welcome to LazyReader</p>
-              </div>
-              <div className="right_header">
-                <img id='close32' className='logo' src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/close/close64.svg`} alt='Closed Icon' onClick={handleClick}></img>
-              </div>
-            </div>
-            <div className="user_instructions">
-              <p className="intro_text">Welcome to the LazyReader Extension! To use the LazyReader summarization features, please select the text you would like to summarize, then right click and select “Capture Snippet”. 
-              On the sidebar, select your desired bullet point format, level, and length before clicking on the checkmark button to generate your summary!</p>
-            </div>
+    <div className={`container ${playful ? 'playful' : 'plain'}`}>
+      <div className="intro">
+        <div className="intro_header_top">
+          <div className="left_intro_header">
+            <img id='sloth128' className='logo' src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/sloth/sloth128.svg`} alt='Sloth Logo'></img>
+            <p className="intro_header">Welcome to LazyReader</p>
+          </div>
+          <div className="right_header">
+            <img id='close64' className='logo' src={`../icons/${playful ? 'playful-ui' : 'plain-ui'}/close/close64.svg`} alt='Closed Icon' onClick={handleClick}></img>
+          </div>
         </div>
-        <div className="settings_header">
-            <p className="setting_header">Settings</p>
+        <div className="user_instructions">
+          <p className="intro_text">Welcome to the LazyReader Extension! To use the LazyReader summarization features, please select the text you would like to summarize, then right click and select “Capture Snippet”.
+            On the sidebar, select your desired bullet point format, level, and length before clicking on the checkmark button to generate your summary!</p>
         </div>
-      <Setup apiKey={apiKey} setApiKey={setApiKey} model={model} setModel={setModel} playful={playful} colorTheme={colorTheme}/>
+      </div>
+      <div className="settings_header">
+        <p className="setting_header">Settings</p>
+      </div>
+      <Setup apiKey={apiKey} setApiKey={setApiKey} model={model} setModel={setModel} playful={playful} colorTheme={colorTheme} />
       <p className="features_header" style={fontStyle2}>Features:</p>
       <div className="features">
         <Feature

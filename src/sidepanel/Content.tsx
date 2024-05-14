@@ -12,15 +12,15 @@ interface SettingsContextValue {
 }
 
 interface ContentProps {
-  summaryText: string;
+  summaryText: Array<string>;
   isLoadingSummary: boolean;
-  keyTermsText: string;
+  keyTermsText: Array<string>;
   isLoadingKeyTerms: boolean;
-  questionsText: string;
+  questionsText: Array<string>;
   isLoadingQuestions: boolean;
 }
 
-function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerms, questionsText, isLoadingQuestions } : ContentProps) {
+function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerms, questionsText, isLoadingQuestions }: ContentProps) {
   const { apiKey, summary, keyTerms, questions, playful, colorTheme } = useContext(SettingsContext);
   const [copySummary, setCopySummary] = useState<boolean>(false);
   const [copyKeyTerms, setCopyKeyTerms] = useState<boolean>(false);
@@ -51,14 +51,18 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
 
   const contentStyle = { backgroundColor };
 
-  const summaryHeight = summary && !keyTerms && !questions ? 74 : (summary && keyTerms && questions ? 35 : 55);
-  const keyTermsHeight = keyTerms && !summary ? 33 : (keyTerms ? 12 : 0);
-  const questionsHeight = questions && !summary ? 33 : (questions ? 12 : 0);
+  const copyToClipBoard = (type: string) => {
+    if (type === 'summary') {
+      navigator.clipboard.writeText(summaryText.join(""))
+    }
+    if (type === 'questions') {
+      navigator.clipboard.writeText(questionsText.join(""))
+    }
+    if (type === 'key_terms') {
+      navigator.clipboard.writeText(keyTermsText.join(""))
+    }
 
-  const summaryTextBoxStyle = { height: `${summaryHeight}vh` };
-  const keyTermsTextBoxStyle = { height: `${keyTermsHeight}vh` };
-  const questionsTextBoxStyle = { height: `${questionsHeight}vh` };
-
+  }
   return (
     <div id='content' className='content'>
       {summary && (
@@ -66,24 +70,25 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
           <div className='section'>
             <div id='summary-header' className='feature-header'>
               <h1 id='summary-heading' style={headingTextStyle}>Summary:</h1>
-              <img 
-                id='copy32' 
+              <img
+                id='copy32'
                 className='button'
-                alt='copy' 
-                src={copySummary 
-                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
+                alt='copy'
+                src={copySummary
+                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg`
                   : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
                 onClick={() => {
                   setCopySummary(true);
+                  copyToClipBoard('summary');
                   setTimeout(() => {
                     setCopySummary(false);
                   }, 3000);
-                }} 
+                }}
                 onMouseOver={(e) => {
                   if (!copySummary) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
                   }
-                }} 
+                }}
                 onMouseOut={(e) => {
                   if (!copySummary) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
@@ -91,8 +96,9 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
                 }}
               />
             </div>
-            <div id ='summary-text-box' className='feature-text-box' style={{ ...summaryTextBoxStyle, ...contentStyle }}>
-              {isLoadingSummary ? <p className='feature-text'>Loading summary...</p> : <p className='feature-text'>{summaryText}</p>}
+            <div id='summary-text-box' className='feature-text-box' style={{ ...contentStyle }}>
+              {isLoadingSummary ? <p className='feature-text'>Loading summary...</p> : summaryText.length > 1 ?
+                <ul className='feature-text' style={{ margin: 0, paddingLeft: '15px' }}>{summaryText.slice(1, summaryText.length).map((s) => (<li>{s}</li>))}</ul> : <p className='feature-text'>{summaryText[0]}</p>}
             </div>
           </div>
         </>
@@ -103,24 +109,25 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
           <div className='section'>
             <div id='key-terms-header' className='feature-header'>
               <h1 id='key-terms-heading' style={headingTextStyle}>Key Terms:</h1>
-              <img 
-                id='copy32' 
+              <img
+                id='copy32'
                 className='button'
-                alt='copy' 
-                src={copyKeyTerms 
-                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
+                alt='copy'
+                src={copyKeyTerms
+                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg`
                   : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
                 onClick={() => {
                   setCopyKeyTerms(true);
+                  copyToClipBoard('key_terms');
                   setTimeout(() => {
                     setCopyKeyTerms(false);
                   }, 3000);
-                }} 
+                }}
                 onMouseOver={(e) => {
                   if (!copyKeyTerms) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
                   }
-                }} 
+                }}
                 onMouseOut={(e) => {
                   if (!copyKeyTerms) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
@@ -128,8 +135,9 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
                 }}
               />
             </div>
-            <div id='key-terms-text-box' className='feature-text-box' style={{ ...keyTermsTextBoxStyle, ...contentStyle }}>
-              {isLoadingKeyTerms ? <p className='feature-text'>Loading key terms...</p> : <p className='feature-text'>{keyTermsText}</p>}
+            <div id='key-terms-text-box' className='feature-text-box' style={{ ...contentStyle }}>
+              {isLoadingKeyTerms ? <p className='feature-text'>Loading key terms...</p> :
+                <ol className='feature-text' style={{ margin: 0, paddingLeft: '15px' }}>{keyTermsText.slice(1, keyTermsText.length).map((s) => (<li>{s}</li>))}</ol>}
             </div>
           </div>
         </>
@@ -140,24 +148,25 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
           <div className='section'>
             <div id='questions-header' className='feature-header'>
               <h1 id='questions-heading' style={headingTextStyle}>Reflection Questions:</h1>
-              <img 
-                id='copy32' 
+              <img
+                id='copy32'
                 className='button'
-                alt='copy' 
-                src={copyQuestions 
-                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg` 
+                alt='copy'
+                src={copyQuestions
+                  ? `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-checked-${colorTheme}.svg`
                   : `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`}
                 onClick={() => {
                   setCopyQuestions(true);
+                  copyToClipBoard('questions');
                   setTimeout(() => {
                     setCopyQuestions(false);
                   }, 3000);
-                }} 
+                }}
                 onMouseOver={(e) => {
                   if (!copyQuestions) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32-filled-${colorTheme}.svg`;
                   }
-                }} 
+                }}
                 onMouseOut={(e) => {
                   if (!copyQuestions) {
                     e.currentTarget.src = `../icons/${playful ? 'playful-ui' : 'plain-ui'}/copy/copy32.svg`;
@@ -165,8 +174,9 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
                 }}
               />
             </div>
-            <div id='questions-text-box' className='feature-text-box' style={{ ...questionsTextBoxStyle, ...contentStyle }}>
-              {isLoadingQuestions ? <p className='feature-text'>Loading questions...</p> : <p className='feature-text'>{questionsText}</p>}
+            <div id='questions-text-box' className='feature-text-box' style={{ ...contentStyle }}>
+              {isLoadingQuestions ? <p className='feature-text'>Loading questions...</p> :
+                <ol className='feature-text' style={{ margin: 0, paddingLeft: '15px' }}>{questionsText.slice(1, questionsText.length).map((s) => (<li>{s}</li>))}</ol>}
             </div>
           </div>
         </>
@@ -174,5 +184,5 @@ function Content({ summaryText, isLoadingSummary, keyTermsText, isLoadingKeyTerm
     </div>
   );
 }
-  
+
 export default Content;

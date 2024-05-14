@@ -15,11 +15,11 @@ interface SettingsContextValue {
 }
 
 interface HeaderProps {
-  setSummaryText: (arg0: string) => void;
+  setSummaryText: (arg0: Array<string>) => void;
   setIsLoadingSummary: (arg0: boolean) => void;
-  setKeyTermsText: (arg0: string) => void;
+  setKeyTermsText: (arg0: Array<string>) => void;
   setIsLoadingKeyTerms: (arg0: boolean) => void;
-  setQuestionsText: (arg0: string) => void;
+  setQuestionsText: (arg0: Array<string>) => void;
   setIsLoadingQuestions: (arg0: boolean) => void;
 }
 
@@ -104,9 +104,15 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
           setErrorMessage(response.error);
         } else {
           console.log('[Content] response from ChatGPT API: ' + response.result);
-          setSummaryText(response.result);
-          setIsLoadingSummary(false);
+          if (bulletPoint) {
+            const bulletPoints = response.result.split('-');
+            console.log(bulletPoints);
 
+            setSummaryText(bulletPoints)
+          } else {
+            setSummaryText([response.result]);
+          }
+          setIsLoadingSummary(false);
         }
       });
       console.log({ apiKey: apiKey, summary: summary, questions: questions, keyTerms: keyTerms, playful: playful, colorTheme: colorTheme, readingLevel: readingLevel, length: length })
@@ -127,7 +133,7 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
 
       chrome.runtime.sendMessage({ type: "getResponse", body }).then((response) => {
         console.log("[Content] response from ChatGPT API: " + response.result);
-        setKeyTermsText(response.result);
+        setKeyTermsText(response.result.split('-'));
         setIsLoadingKeyTerms(false);
       });
       console.log({ apiKey: apiKey, summary: summary, questions: questions, keyTerms: keyTerms, playful: playful, colorTheme: colorTheme, readingLevel: readingLevel, length: length })
@@ -147,7 +153,7 @@ function Header({ setSummaryText, setIsLoadingSummary, setKeyTermsText, setIsLoa
 
       chrome.runtime.sendMessage({ type: "getResponse", body }).then((response) => {
         console.log("[Content] response from ChatGPT API: " + response.result);
-        setQuestionsText(response.result);
+        setQuestionsText(response.result.replace("`", "").split('-'));
         setIsLoadingQuestions(false);
       });
       console.log({ apiKey: apiKey, summary: summary, questions: questions, keyTerms: keyTerms, playful: playful, colorTheme: colorTheme, readingLevel: readingLevel, length: length })

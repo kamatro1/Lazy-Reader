@@ -22,11 +22,11 @@ export const SettingsContext = createContext<{
 });
 
 function SidePanelContent() {
-  const [summaryText, setSummaryText] = useState('');
+  const [summaryText, setSummaryText] = useState<Array<string>>([]);
   const [isLoadingSummary, setIsLoadingSummary] = React.useState<boolean>(false);
-  const [keyTermsText, setKeyTermsText] = useState('');
+  const [keyTermsText, setKeyTermsText] = useState<Array<string>>([]);
   const [isLoadingKeyTerms, setIsLoadingKeyTerms] = React.useState<boolean>(false);
-  const [questionsText, setQuestionsText] = useState('');
+  const [questionsText, setQuestionsText] = useState<Array<string>>([]);
   const [isLoadingQuestions, setIsLoadingQuestions] = React.useState<boolean>(false);
   const { playful } = useContext(SettingsContext);
   const bodyStyle = {
@@ -37,12 +37,12 @@ function SidePanelContent() {
   return (
     <div id='sidePanel' className={`side-panel ${playful ? 'playful' : 'plain'}`} style={bodyStyle}>
       <Header setSummaryText={setSummaryText} setIsLoadingSummary={setIsLoadingSummary}
-              setKeyTermsText={setKeyTermsText} setIsLoadingKeyTerms={setIsLoadingKeyTerms}
-              setQuestionsText={setQuestionsText} setIsLoadingQuestions={setIsLoadingQuestions}
+        setKeyTermsText={setKeyTermsText} setIsLoadingKeyTerms={setIsLoadingKeyTerms}
+        setQuestionsText={setQuestionsText} setIsLoadingQuestions={setIsLoadingQuestions}
       />
       <Content summaryText={summaryText} isLoadingSummary={isLoadingSummary}
-               keyTermsText={keyTermsText} isLoadingKeyTerms={isLoadingKeyTerms}
-               questionsText={questionsText} isLoadingQuestions={isLoadingQuestions}
+        keyTermsText={keyTermsText} isLoadingKeyTerms={isLoadingKeyTerms}
+        questionsText={questionsText} isLoadingQuestions={isLoadingQuestions}
       />
     </div>
   );
