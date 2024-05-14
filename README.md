@@ -24,25 +24,28 @@ The third screenshot showcases the **Side Panel** where the user customizes the 
 
 ## Installation from Source
 
-0. In the terminal, naviagte to the folder where you'd like to install the extension (e.g., ```cd Desktop```)
+0. In the terminal, naviagte to the folder where you'd like to install the extension (e.g., ```cd Desktop```).
+
 1. Clone the repository:
-   ```bash
+
+    ```bash
    git clone https://github.com/kamatro1/Lazy-Reader.git
    ```
-2. Install dependencies:
+
+3. Install dependencies:
 
    ```bash
    cd chrome-extension-text-collector
    npm install
    ```
 
-3. Build the extension:
+4. Build the extension:
 
    ```bash
    npm run build
    ```
 
-4. Load the extension in Chrome:
+5. Load the extension in Chrome:
 
    - Open Chrome and navigate to `chrome://extensions`
    - Enable "Developer mode"
@@ -50,7 +53,7 @@ The third screenshot showcases the **Side Panel** where the user customizes the 
 
 ## Usage Instructions
 
-Once you load the extension in Chrome (see *Step 4* of *Installation from Source* above), you'll be automatically directed to the *Settings Page*
+Once you load the extension in Chrome (see *Step 4* of *Installation from Source* above), you'll be automatically directed to the *Settings Page*.
 
 ### Settings Page
 
@@ -92,4 +95,4 @@ Once you have saved your settings on the *Settings Page*, and selected the web p
 
 ## Credits
 
-The initial setup of this project was based on Professor Lumbroso's [Chrome Extension Starter](https://github.com/CIS-3500/chrome-extension-react-typescript-starter/blob/main/README.md) repo. Furthermore, parts of this ```ReadMe.md``` file have been taken from the same repo's ReadMe. 
+The initial setup of this project was based on Professor Lumbroso's [Chrome Extension Starter](https://github.com/CIS-3500/chrome-extension-react-typescript-starter/tree/main) repo. Furthermore, parts of this ```ReadMe.md``` file have been taken from the same repo's ReadMe. 
