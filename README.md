@@ -1,4 +1,8 @@
 # Lazy-Reader
+<p align="center">
+  <img width="128" height="128" src="./logo.png">
+</p>
+
 This repo contains the final project for the University of Pennsylvania CIS 3500 Spring 2024 course for Team 6. The team consists of [Annie Wang](https://github.com/anniewangre), [Emma Lee](https://github.com/emmrlee), [Kevin Lee](https://github.com/kleekev), & [Rohan Kamat](https://github.com/kamatro1).
 
 In this project, we built a **Chrome extension** using [React](https://react.dev/) with TypeScript and Webpack. It showcases key features such as interacting with Chrome APIs ([storage](https://developer.chrome.com/docs/extensions/reference/api/storage), [contextMenus](https://developer.chrome.com/docs/extensions/reference/api/contextMenus), [sidePanel](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)) and the [OpenAI API](https://platform.openai.com/docs/introduction).
@@ -94,6 +98,10 @@ Once you have saved your settings on the *Settings Page*, and selected the web p
 - Click the tick icon on the right to save your selections and generate a response.
 - Copy the response using the overlayed rectangles on the right.
 - If you change any settings, or select new text, hit the "Regenerate" button where the tick icon was to generate a new response.
+
+## Reporting Issues
+
+Please feel free to make any comments regarding suggestions, bugs, improvements, or new features in the issues section of the repository!
 
 ## Credits
 
