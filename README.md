@@ -96,3 +96,7 @@ Once you have saved your settings on the *Settings Page*, and selected the web p
 ## Credits
 
 The initial setup of this project was based on Professor Lumbroso's [Chrome Extension Starter](https://github.com/CIS-3500/chrome-extension-react-typescript-starter/tree/main) repo. Furthermore, parts of this ```ReadMe.md``` file have been taken from the same repo's ReadMe. 
+
+## License
+
+This project is licensed under the terms of the MIT license.
