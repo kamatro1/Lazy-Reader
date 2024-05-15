@@ -1,5 +1,7 @@
 # Lazy-Reader
-This repo contains the final project for the University of Pennsylvania CIS 3500 Spring 2024 course for Team 6. In this project, we built a Chrome extension using [React](https://react.dev/) with TypeScript and Webpack. It showcases key features such as interacting with Chrome APIs ([storage](https://developer.chrome.com/docs/extensions/reference/api/storage), [contextMenus](https://developer.chrome.com/docs/extensions/reference/api/contextMenus), [sidePanel](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)) and the [OpenAI API](https://platform.openai.com/docs/introduction).
+This repo contains the final project for the University of Pennsylvania CIS 3500 Spring 2024 course for Team 6. The team consists of [Annie Wang](https://github.com/anniewangre), [Emma Lee](https://github.com/emmrlee), [Kevin Lee](https://github.com/kleekev), & [Rohan Kamat](https://github.com/kamatro1).
+
+In this project, we built a **Chrome extension** using [React](https://react.dev/) with TypeScript and Webpack. It showcases key features such as interacting with Chrome APIs ([storage](https://developer.chrome.com/docs/extensions/reference/api/storage), [contextMenus](https://developer.chrome.com/docs/extensions/reference/api/contextMenus), [sidePanel](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)) and the [OpenAI API](https://platform.openai.com/docs/introduction).
 
 A "landing page" showcasing the extension can be found [here](https://anniewangre.github.io/LazyReader-Landing-Page/).
 
